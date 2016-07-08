@@ -11,8 +11,11 @@ import QuartzCore
 
 protocol SideBarViewProtocol {
     func sideBarProgress(isOpen:Bool,edges:UIRectEdge,progress:CGFloat)
+    //已打开
     func isShowed()
+    //已关闭
     func isHidden()
+    //回传数据
     func sideBarRoute(data:Dictionary<String,AnyObject>)
 }
 
@@ -37,6 +40,7 @@ class SideBarView: UIView {
     let dWidth = UIScreen.main().bounds.width
     let dHeight = UIScreen.main().bounds.height
     
+    //方向，宽度
     class func addSideBar(parentCtl:UIViewController,edges:UIRectEdge,widthPercent:CGFloat)->SideBarView? {
         print("addSideBar")
         guard  edges == .left || edges == .right else {
