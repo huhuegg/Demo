@@ -65,7 +65,7 @@ private extension TotalListController{
 //SideBar
 extension TotalListController:SideBarViewProtocol {
     func addSideBar() {
-        sideBarView = SideBarView.addSideBar(parentCtl: self, edges: .right, widthPercent: 0.5)
+        sideBarView = SideBarView.addSideBar(parentCtl: self, edges: .right, widthPercent: 0.7)
         sideBarView?.initView(data: nil)
     }
     

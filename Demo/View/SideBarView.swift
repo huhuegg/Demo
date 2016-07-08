@@ -253,15 +253,21 @@ extension SideBarView:UIGestureRecognizerDelegate {
             self.openChanged(edges: openEdges, progress: progress)
         case .ended, .cancelled:    // 滑动结束或取消
 //            print("showSideBar: ended or cancelled")
-            //滑动超过50%宽度
-            if progress > 0.5 {
+            //滑动超过30%宽度
+            if progress > 0.3 {
                 if let rect = self.openCompleted(edges: openEdges) {
-                    UIView.animate(withDuration: TimeInterval((1 - progress)*0.5), animations: { 
+                    UIView.animate(withDuration: TimeInterval((1 - progress)*0.7), delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                         self.frame = rect
                         }, completion: { (_) in
                             self.isShow = true
                             self.delegate?.isShowed()
                     })
+//                    UIView.animate(withDuration: TimeInterval((1 - progress)*0.5), animations: { 
+//                        self.frame = rect
+//                        }, completion: { (_) in
+//                            self.isShow = true
+//                            self.delegate?.isShowed()
+//                    })
                 }
             } else {
                 if let rect = self.openCancelled(edges: openEdges) {
