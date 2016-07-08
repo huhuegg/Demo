@@ -1,0 +1,10 @@
+framework module SimpleFramework {
+  umbrella header "SimpleFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module SimpleFramework.Swift {
+    header "SimpleFramework-Swift.h"
+}
