@@ -65,7 +65,7 @@ private extension TotalListController{
 //SideBar
 extension TotalListController:SideBarViewProtocol {
     func addSideBar() {
-        sideBarView = SideBarView.addSideBar(parentCtl: self, edges: .right, widthPercent: 0.7)
+        sideBarView = SideBarView.addSideBar(parentCtl: self, edges: .left, widthPercent: 0.7)
         sideBarView?.initView(data: nil)
     }
     
@@ -73,18 +73,34 @@ extension TotalListController:SideBarViewProtocol {
         sideBarView?.removeSideBar()
     }
     
-    func sideBarProgress(isOpen: Bool, edges: UIRectEdge, progress: CGFloat) {
-        print("SideBarViewProtocol sideBarProgress, isOpen:\(isOpen == true ? "Yes":"No") edges:\(edges == .left ? ".left":".right") progress:\(progress)")
-        if isOpen { //打开侧边栏
-            if edges == .left { //侧边栏在左侧
-
-            } else {
-                
-            }
-        } else { //关闭侧边栏
-            
-        }
+    func sideBarOffset(offsetX: CGFloat) {
+//        print(self.view.subviews)
+//        print("self.view.x:\(self.view.frame.origin.x) offset:\(offsetX)")
+//        let newX = 0.05 * offsetX
+//        if newX < 100 {
+//            self.view.frame.origin.x -= 0.05 * offsetX
+//        }
     }
+    
+    func sideBarCancled(edges: UIRectEdge, cancleDuration: TimeInterval) {
+//        
+//        UIView.animate(withDuration: cancleDuration) {
+//            self.view.frame.origin.x = 0
+//        }
+    }
+    
+    func sideBarCompleted(edges: UIRectEdge, completeDuration: TimeInterval) {
+//        var newX:CGFloat = 0.0
+//        if edges == .left {
+//            newX = -(self.view.frame.width - sideBarView!.frame.width)
+//        } else {
+//            newX = self.view.frame.width - sideBarView!.frame.width
+//        }
+//        UIView.animate(withDuration: completeDuration) { 
+//            self.view.frame.origin.x = newX
+//        }
+    }
+
     func isShowed() {
         print("SideBarViewProtocol isShowed")
 

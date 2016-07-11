@@ -10,12 +10,20 @@ import UIKit
 import QuartzCore
 
 protocol SideBarViewProtocol {
-    func sideBarProgress(isOpen:Bool,edges:UIRectEdge,progress:CGFloat)
-    //已打开
+    /**
+     已打开
+     **/
     func isShowed()
-    //已关闭
+
+    /**
+     已关闭
+     **/
     func isHidden()
-    //回传数据
+    
+    /**
+     回传数据
+     - parameter data:  回传数据
+     **/
     func sideBarRoute(data:Dictionary<String,AnyObject>)
 }
 
@@ -24,23 +32,44 @@ class SideBarView: UIView {
     @IBOutlet weak var testButton1: UIButton!
     @IBOutlet weak var testButton2: UIButton!
     
-    
+    //SideBarViewProtocol
     var delegate:SideBarViewProtocol?
+    //ParentController的view
     var parent:UIView?
+    //动画时使用的ParentController.view的截图
+    var parentImageView:UIImageView?
     
+    //开启侧边栏手势
     var openSideBarRecognizer:UIScreenEdgePanGestureRecognizer?
+    //开启侧边栏位置
     var openEdges:UIRectEdge = .left
+    //关闭侧边栏手势
     var closeSideBarRecognizer:UIPanGestureRecognizer?
-    var closeEdges:UIRectEdge = .right
     
-    var widthPercent:CGFloat = 1.0
+    //侧边栏宽度占屏幕宽度的百分比
+    var widthPercent:CGFloat = 0.7
     
+    //滑动打开侧边栏结束或取消时判断当前应该使用结束动画还是取消动画
+    var openSwitchPercent:CGFloat = 0.5
+    //滑动关闭侧边栏结束或取消时判断当前应该使用结束动画还是取消动画
+    var closeSwitchPercent:CGFloat = 0.5
+    //当前是否被打开
     var isShow:Bool = false
     
     let dWidth = UIScreen.main().bounds.width
     let dHeight = UIScreen.main().bounds.height
     
-    //方向，宽度
+    //获取侧边栏宽度
+    func getSideBarWidth() -> CGFloat {
+        return UIScreen.main().bounds.width * widthPercent
+    }
+    
+    /**
+    添加侧边栏
+     - parameter parentCtl:  需要添加侧边栏的Controller
+     - parameter edges:  侧边栏打开方向
+     - parameter widthPercent:  侧边栏占屏幕宽度百分比
+    **/
     class func addSideBar(parentCtl:UIViewController,edges:UIRectEdge,widthPercent:CGFloat)->SideBarView? {
         print("addSideBar")
         guard  edges == .left || edges == .right else {
@@ -49,7 +78,6 @@ class SideBarView: UIView {
         }
         
         let v = self.instanceFromNib()
-        
         if let p = parentCtl as? SideBarViewProtocol {
             v.delegate = p
         }
@@ -57,46 +85,28 @@ class SideBarView: UIView {
         v.parent = parentCtl.view
         v.openEdges = edges
         v.widthPercent = widthPercent
-        
-        v.closeEdges = v.openEdges == UIRectEdge.left ? UIRectEdge.right : UIRectEdge.left
        
         v.parent!.addSubview(v)
-        
-        v.setupFrame()
-        
+        v.setupFrame(widthPercent:widthPercent, edges:edges)
         v.setupGestureRecognizers()
-
         return v
     }
     
-    func initView(data:Dictionary<String,AnyObject>?) {
-        self.backgroundColor = UIColor.yellow()
-        
-        testButton1.addTarget(self, action: .testButton1Clicked, for: UIControlEvents.touchUpInside)
-        testButton2.addTarget(self, action: .testButton2Clicked, for: UIControlEvents.touchUpInside)
-    }
-    
+    /**
+     移除侧边栏
+     **/
     func removeSideBar() {
         self.removeGestureRecognizers()
         self.removeFromSuperview()
     }
     
-    func setupFrame() {
-//        print("setupFrame")
-        let width = dWidth * widthPercent
-        if openEdges == .left {
-            self.frame = CGRect(x: -width, y: 0, width: width, height: dHeight)
-        } else {
-            self.frame = CGRect(x: dWidth + width, y: 0, width: width, height: dHeight)
-        }
+    /**
+     初始化View
+     **/
+    func initView(data:Dictionary<String,AnyObject>?) {
         
-        self.layer.shadowOpacity = 0.6 // 阴影透明度
-        self.layer.shadowColor = UIColor.gray().cgColor // 阴影的颜色
-        
-        self.layer.shadowRadius = 6;// 阴影扩散的范围控制
-        
-        self.layer.shadowOffset = CGSize(width: 3, height: 3) // 阴影的范围
-
+        testButton1.addTarget(self, action: .testButton1Clicked, for: UIControlEvents.touchUpInside)
+        testButton2.addTarget(self, action: .testButton2Clicked, for: UIControlEvents.touchUpInside)
     }
 }
 
@@ -116,6 +126,7 @@ extension SideBarView {
     }
 }
 
+//MARK:- Private function
 extension SideBarView {
     private class func instanceFromNib()->SideBarView {
         if let v = UIView.loadFromNibNamed(nibNamed: "SideBarView") as? SideBarView {
@@ -124,79 +135,176 @@ extension SideBarView {
         return SideBarView()
     }
     
-    func openChanged(edges:UIRectEdge,progress:CGFloat) {
+    private func setupFrame(widthPercent:CGFloat, edges:UIRectEdge) {
+        print("setupFrame")
+        
+        let sidebarWidth = getSideBarWidth()
         if edges == .left {
-            let x = (progress - 1) * self.frame.width
-            print("XXXXXX edges: .left  x:\(x) progress:\(progress)")
-            self.frame = CGRect(x: x, y: 0, width: self.frame.width, height: self.frame.height)
+            self.frame = CGRect(x: -sidebarWidth, y: 0, width: sidebarWidth, height: dHeight)
+        } else {
+            self.frame = CGRect(x: dWidth, y: 0, width: sidebarWidth, height: dHeight)
+        }
+        
+    }
+    
+    private func addShadow() {
+        self.layer.shadowOpacity = 0.6 // 阴影透明度
+        self.layer.shadowColor = UIColor.gray().cgColor // 阴影的颜色
+        self.layer.shadowRadius = 3;// 阴影扩散的范围控制
+        self.layer.shadowOffset = CGSize(width: 1, height: 1) // 阴影的范围
+    }
+    
+    private func clearShadow() {
+        self.layer.shadowColor = UIColor.clear().cgColor
+    }
+
+    private func addParentImageView() {
+        print("addParentImageView:\(parentImageView)")
+        if parentImageView == nil {
+            if let image = UIView.imageFromView(v: parent) {
+                parentImageView = UIImageView.init(image: image)
+                parentImageView!.frame = parent!.bounds
+                parent!.insertSubview(parentImageView!, belowSubview: self)
+            }
+        }
+    }
+    
+    private func removeParentImageView() {
+        parentImageView?.removeFromSuperview()
+        parentImageView = nil
+    }
+    
+    private func openChanged(edges:UIRectEdge,progress:CGFloat) {
+        print("openChanged")
+
+        if edges == .left {
+            self.frame.origin.x = (progress - 1) * self.view.frame.width
+            self.parentImageView!.frame.origin.x = getSideBarWidth() + self.frame.origin.x
         } else {
             
-            let x = dWidth - progress * self.frame.width
-//            print("XXXXXX edges: .right x:\(x) progress:\(progress)")
-            self.frame = CGRect(x: x, y: 0, width: self.frame.width, height: self.frame.height)
+            self.frame.origin.x = dWidth - progress * self.view.frame.width
+            self.parentImageView!.frame.origin.x = self.frame.origin.x - dWidth
         }
     }
     
-    func openCancelled(edges:UIRectEdge)->CGRect? {
-        var rect:CGRect?
+    private func openCancelled(edges:UIRectEdge, duration:TimeInterval) {
+        print("openCancelled")
+        var newX:CGFloat = 0.0
+        var parentImageViewX:CGFloat = 0.0
         if edges == .left {
-            rect = CGRect(x: -self.frame.width, y: 0, width: self.frame.width, height: self.frame.height)
+            newX = -self.frame.width
+            parentImageViewX = 0
         } else {
-            rect = CGRect(x: dWidth + self.frame.width, y: 0, width: self.frame.width, height: self.frame.height)
+            newX = dWidth + self.frame.width
+            parentImageViewX = 0
         }
-//        print("cancelled:\(rect)")
-        return rect
+
+        UIView.animate(withDuration: duration, animations: {
+            self.frame.origin.x = newX
+            self.parentImageView!.frame.origin.x = parentImageViewX
+            }, completion: { (_) in
+                self.isShow = false
+                self.clearShadow()
+                self.removeParentImageView()
+        })
     }
     
-    func openCompleted(edges:UIRectEdge)->CGRect? {
-        var rect:CGRect?
+    private func openCompleted(edges:UIRectEdge, duration:TimeInterval) {
+        print("openCompleted")
+        var newX:CGFloat = 0.0
+        var parentImageViewX:CGFloat = 0.0
         if edges == .left {
-            rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+            newX = 0
+            parentImageViewX = self.getSideBarWidth()
         } else {
-            rect = CGRect(x: dWidth - self.frame.width, y: 0, width: self.frame.width, height: self.frame.height)
+            newX = dWidth - self.frame.width
+            parentImageViewX = -self.frame.width
+        }
+
+        UIView.animate(withDuration: duration, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.frame.origin.x = newX
+            self.parentImageView!.frame.origin.x = parentImageViewX
+            }, completion: { (_) in
+                self.isShow = true
+                self.delegate?.isShowed()
+                self.addShadow()
+        })
+    }
+    
+    private func closeChanged(edges:UIRectEdge,progress:CGFloat) {
+        print("closeChanged")
+        var newX:CGFloat = 0.0
+        var parentImageViewX:CGFloat = 0.0
+        
+        
+        if edges == .left {
+            newX = -progress * self.frame.width
+            parentImageViewX = newX + getSideBarWidth()
+            //print("XXXXXX edges: .right x:\(newX) progress:\(progress)")
             
-        }
-//        print("completed:\(rect)")
-        return rect
-    }
-    
-    func closeChanged(edges:UIRectEdge,progress:CGFloat) {
-        if edges == .left {
-            let x = dWidth + (progress - 1) * self.frame.width
-//            print("XXXXXX edges: .left  x:\(x) progress:\(progress)")
-            self.frame = CGRect(x: x, y: 0, width: self.frame.width, height: self.frame.height)
-        } else {
             
-            let x = -progress * self.frame.width
-//            print("XXXXXX edges: .right x:\(x) progress:\(progress)")
-            self.frame = CGRect(x: x, y: 0, width: self.frame.width, height: self.frame.height)
+        } else {
+            newX = dWidth + (progress - 1) * self.frame.width
+            if newX - getSideBarWidth() <= 0 {
+                //确保不会露出下面的view
+                parentImageViewX = newX - getSideBarWidth()
+            }
+            //print("XXXXXX edges: .left  x:\(newX) progress:\(progress)")
         }
+        self.frame.origin.x = newX
+        self.parentImageView!.frame.origin.x = parentImageViewX
+
     }
     
-    func closeCancelled(edges:UIRectEdge)->CGRect? {
-        var rect:CGRect?
+    private func closeCancelled(edges:UIRectEdge, duration:TimeInterval) {
+        print("closeCancelled")
+        var newX:CGFloat = 0.0
+        var parentImageViewX:CGFloat = 0.0
+        
         if edges == .left {
-            rect = CGRect(x: dWidth - self.frame.width, y: 0, width: self.frame.width, height: self.frame.height)
+            newX = 0
+            parentImageViewX = getSideBarWidth() + newX
         } else {
-            rect = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+            newX = dWidth - self.frame.width
+            parentImageViewX = newX - getSideBarWidth()
         }
-//        print("cancelled:\(rect)")
-        return rect
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.frame.origin.x = newX
+            self.parentImageView!.frame.origin.x = parentImageViewX
+            }, completion: { (_) in
+                self.isShow = true
+                self.addShadow()
+                
+        })
     }
     
-    func closeCompleted(edges:UIRectEdge)->CGRect? {
-        var rect:CGRect?
+    private func closeCompleted(edges:UIRectEdge, duration:TimeInterval) {
+        print("closeCompleted")
+        var newX:CGFloat = 0
+        var parentImageViewX:CGFloat = 0.0
+        
         if edges == .left {
-            rect = CGRect(x: dWidth, y: 0, width: self.frame.width, height: self.frame.height)
+            newX = -self.frame.width
+            parentImageViewX = 0
         } else {
-            rect = CGRect(x: -self.frame.width, y: 0, width: self.frame.width, height: self.frame.height)
-            
+            newX = dWidth
+            parentImageViewX = 0
         }
-//        print("completed:\(rect)")
-        return rect
+
+        UIView.animate(withDuration: duration, animations: {
+            self.frame.origin.x = newX
+            self.parentImageView!.frame.origin.x = parentImageViewX
+            }, completion: { (_) in
+                self.isShow = false
+                self.delegate?.isHidden()
+                self.clearShadow()
+                self.removeParentImageView()
+        })
     }
 }
-    
+
+//MARK:- UIGestureRecognizerDelegate
 extension SideBarView:UIGestureRecognizerDelegate {
     
     func setupGestureRecognizers() {
@@ -206,13 +314,7 @@ extension SideBarView:UIGestureRecognizerDelegate {
         openSideBarRecognizer!.edges = openEdges
         openSideBarRecognizer!.delegate = self
         parent!.addGestureRecognizer(openSideBarRecognizer!)
-        
-//        closeSideBarRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(SideBarView.closeSideBarRecognizer(recognizer:)))
-//        closeSideBarRecognizer!.edges = openEdges == UIRectEdge.left ? UIRectEdge.right : UIRectEdge.left
-//        closeSideBarRecognizer!.delegate = self
-//        parent.addGestureRecognizer(closeSideBarRecognizer!)
-//        
-        
+
         closeSideBarRecognizer = UIPanGestureRecognizer(target: self, action: #selector(SideBarView.closeSideBarRecognizer(recognizer:)))
         closeSideBarRecognizer!.delegate = self
         self.addGestureRecognizer(closeSideBarRecognizer!)
@@ -224,9 +326,9 @@ extension SideBarView:UIGestureRecognizerDelegate {
         self.removeGestureRecognizer(closeSideBarRecognizer!)
     }
     
+    //打开侧边栏的手势处理
     func openSideBarRecognizer(recognizer: UIScreenEdgePanGestureRecognizer) {
         guard isShow == false else {
-//            print("SideBar already show")
             return
         }
 
@@ -238,72 +340,58 @@ extension SideBarView:UIGestureRecognizerDelegate {
         } else {
             x = 1 - recognizer.translation(in: self).x
         }
-        var progress = x / self.bounds.width
+        var progress = x / self.bounds.width / widthPercent
         progress = min(1.0, max(0.0, progress))
-        self.delegate?.sideBarProgress(isOpen: true, edges: openEdges, progress: progress)
         
-        print("openSideBarRecognizer edges:\(openEdges == .left ? ".left" : ".right") offsetX:\(x)  progress:\(progress)")
+        //print("openSideBarRecognizer edges:\(openEdges == .left ? ".left" : ".right") offsetX:\(x)  progress:\(progress)")
         
         switch recognizer.state {
         case .began:
 //            print("showSideBar: began")
+            //截取当前的view做动画
+            addParentImageView()
+            //为侧边栏添加阴影
+            addShadow()
             self.openChanged(edges: openEdges, progress: progress)
         case .changed:  // 滑动过程中，根据在屏幕上滑动的百分比更新状态
 //            print("showSideBar: changed")
             self.openChanged(edges: openEdges, progress: progress)
         case .ended, .cancelled:    // 滑动结束或取消
 //            print("showSideBar: ended or cancelled")
-            //滑动超过30%宽度
-            if progress > 0.3 {
-                if let rect = self.openCompleted(edges: openEdges) {
-                    UIView.animate(withDuration: TimeInterval((1 - progress)*0.7), delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                        self.frame = rect
-                        }, completion: { (_) in
-                            self.isShow = true
-                            self.delegate?.isShowed()
-                    })
-//                    UIView.animate(withDuration: TimeInterval((1 - progress)*0.5), animations: { 
-//                        self.frame = rect
-//                        }, completion: { (_) in
-//                            self.isShow = true
-//                            self.delegate?.isShowed()
-//                    })
-                }
+
+            if progress > openSwitchPercent {
+                let duration = TimeInterval((1 - progress)*0.7)
+                self.openCompleted(edges: openEdges, duration: duration)
+
             } else {
-                if let rect = self.openCancelled(edges: openEdges) {
-                    UIView.animate(withDuration: TimeInterval(progress*0.5), animations: { 
-                        self.frame = rect
-                        }, completion: { (_) in
-                            self.isShow = false
-                            self.delegate?.isHidden()
-                    })
-                }
+                let duration = TimeInterval(progress*0.5)
+                self.openCancelled(edges: openEdges, duration:duration)
+
             }
         default:
             break
         }
     }
     
+    //关闭侧边栏的手势处理
     func closeSideBarRecognizer(recognizer: UIScreenEdgePanGestureRecognizer) {
         guard self.isShow == true else {
-//            print("SideBar already closed")
             return
         }
         
         let point = recognizer.translation(in: self)
-//        print("closeSideBarRecognizer  Point:\(point)")
         
         var x:CGFloat = 0
         
-        if closeEdges == .left {
-            x = recognizer.translation(in: self).x
-        } else {
+        if openEdges == .left {
             x = 1 - recognizer.translation(in: self).x
+        } else {
+            x = recognizer.translation(in: self).x
         }
+        
+
         var progress = x / self.bounds.width
         progress = min(1.0, max(0.0, progress))
-        
-        self.delegate?.sideBarProgress(isOpen: false, edges: closeEdges, progress: progress)
         
         
         if point.x > 0 { //from left
@@ -317,31 +405,18 @@ extension SideBarView:UIGestureRecognizerDelegate {
         switch recognizer.state {
         case .began:
 //            print("closeSideBar: began")
-            self.closeChanged(edges: closeEdges, progress: progress)
+            self.closeChanged(edges: openEdges, progress: progress)
         case .changed:  // 滑动过程中，根据在屏幕上滑动的百分比更新状态
 //            print("closeSideBar: changed")
-            self.closeChanged(edges: closeEdges, progress: progress)
+            self.closeChanged(edges: openEdges, progress: progress)
         case .ended, .cancelled:    // 滑动结束或取消
 //            print("closeSideBar: ended or cancelled")
-            //滑动超过50%宽度
-            if progress > 0.5 {
-                if let rect = self.closeCompleted(edges: closeEdges) {
-                    UIView.animate(withDuration: TimeInterval((1 - progress)*0.5), animations: { 
-                        self.frame = rect
-                        }, completion: { (_) in
-                            self.isShow = false
-                            self.delegate?.isHidden()
-                    })
-                }
+            if progress > closeSwitchPercent {
+                let duration = TimeInterval((1 - progress)*0.5)
+                self.closeCompleted(edges: openEdges, duration: duration)
             } else {
-                if let rect = self.closeCancelled(edges: closeEdges) {
-                    UIView.animate(withDuration: TimeInterval(progress*0.5), animations: { 
-                        self.frame = rect
-                        }, completion: { (_) in
-                            self.isShow = true
-                            self.delegate?.isShowed()
-                    })
-                }
+                let duration = TimeInterval(progress*0.5)
+                self.closeCancelled(edges: openEdges, duration: duration)
             }
         default:
             break

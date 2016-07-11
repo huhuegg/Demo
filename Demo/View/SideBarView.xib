@@ -38,12 +38,12 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Rrk-ey-8uc" secondAttribute="trailing" id="1ut-Te-2cb"/>
-                <constraint firstAttribute="bottom" secondItem="Rrk-ey-8uc" secondAttribute="bottom" id="2LV-rM-yfP"/>
-                <constraint firstItem="Rrk-ey-8uc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Wai-o8-1kV"/>
-                <constraint firstItem="Rrk-ey-8uc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cXY-ya-yEh"/>
+                <constraint firstItem="Rrk-ey-8uc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="24b-ya-5eX"/>
+                <constraint firstAttribute="bottom" secondItem="Rrk-ey-8uc" secondAttribute="bottom" id="bX4-Xw-wkq"/>
+                <constraint firstAttribute="trailing" secondItem="Rrk-ey-8uc" secondAttribute="trailing" id="ebJ-Jm-TTe"/>
+                <constraint firstItem="Rrk-ey-8uc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ftN-S8-W8K"/>
             </constraints>
             <connections>
                 <outlet property="testButton1" destination="n39-9K-B9y" id="9JT-LJ-MSf"/>
