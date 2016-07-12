@@ -105,12 +105,28 @@ class SideBarView: UIView {
      初始化View
      **/
     func initView(data:Dictionary<String,AnyObject>?) {
+        setCorner()
         maskAvatar()
         addTarget()
     }
     
+    //半边圆角或部分圆角
+    private func setCorner() {
+        let cornerRadii = CGSize(width: 8, height: 8)
+        var corners:UIRectCorner!
+        if self.openEdges == .left {
+            corners = [UIRectCorner.topRight,UIRectCorner.bottomRight]
+        } else {
+            corners = [UIRectCorner.topLeft,UIRectCorner.bottomLeft]
+        }
+        let bezierPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: cornerRadii)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = bezierPath.cgPath
+        self.layer.mask = shapeLayer
+    }
+    
+    //创建图层蒙板(不规则边框头像)
     private func maskAvatar() {
-        //创建图层蒙板
         let maskLayer = CALayer()
         //xib中的view不支持frame调整,获取avatarImageView的frame为0,0,0,0 
         maskLayer.frame = CGRect(x: 0, y: 0, width: self.frame.width / 3, height: self.frame.width / 3)
