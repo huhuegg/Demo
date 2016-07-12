@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,12 +30,20 @@
                             </constraints>
                             <state key="normal" title="testButton2"/>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="7U5-tF-0am">
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="7U5-tF-0am" secondAttribute="height" id="vac-vK-XWv"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="7U5-tF-0am" firstAttribute="width" secondItem="Rrk-ey-8uc" secondAttribute="width" multiplier="1:3" id="4Qf-AH-qWU"/>
                         <constraint firstItem="zP1-Ik-zte" firstAttribute="centerX" secondItem="Rrk-ey-8uc" secondAttribute="centerX" id="9gK-B3-LgM"/>
+                        <constraint firstItem="7U5-tF-0am" firstAttribute="top" secondItem="Rrk-ey-8uc" secondAttribute="top" constant="60" id="OsF-HP-qUQ"/>
+                        <constraint firstItem="7U5-tF-0am" firstAttribute="centerX" secondItem="Rrk-ey-8uc" secondAttribute="centerX" id="PSB-n8-zOf"/>
                         <constraint firstItem="n39-9K-B9y" firstAttribute="centerX" secondItem="Rrk-ey-8uc" secondAttribute="centerX" id="WlE-Bw-BPI"/>
-                        <constraint firstItem="n39-9K-B9y" firstAttribute="top" secondItem="Rrk-ey-8uc" secondAttribute="top" constant="79" id="ldW-rA-q2M"/>
+                        <constraint firstItem="n39-9K-B9y" firstAttribute="top" secondItem="7U5-tF-0am" secondAttribute="bottom" constant="45" id="jjv-Tq-hDN"/>
                         <constraint firstItem="zP1-Ik-zte" firstAttribute="top" secondItem="n39-9K-B9y" secondAttribute="bottom" constant="40" id="lyh-SN-elH"/>
                     </constraints>
                 </view>
@@ -46,6 +56,7 @@
                 <constraint firstItem="Rrk-ey-8uc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ftN-S8-W8K"/>
             </constraints>
             <connections>
+                <outlet property="avatarImageView" destination="7U5-tF-0am" id="5IO-s9-aqv"/>
                 <outlet property="testButton1" destination="n39-9K-B9y" id="9JT-LJ-MSf"/>
                 <outlet property="testButton2" destination="zP1-Ik-zte" id="s4J-M9-Lon"/>
                 <outlet property="view" destination="Rrk-ey-8uc" id="J7d-Rm-ldS"/>
@@ -53,4 +64,7 @@
             <point key="canvasLocation" x="26.5" y="51.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon" width="250" height="250"/>
+    </resources>
 </document>

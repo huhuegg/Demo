@@ -29,6 +29,7 @@ protocol SideBarViewProtocol {
 
 class SideBarView: UIView {
     @IBOutlet weak var view: UIView!
+    @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var testButton1: UIButton!
     @IBOutlet weak var testButton2: UIButton!
     
@@ -104,7 +105,29 @@ class SideBarView: UIView {
      初始化View
      **/
     func initView(data:Dictionary<String,AnyObject>?) {
+        maskAvatar()
+        addTarget()
+    }
+    
+    private func maskAvatar() {
+        //创建图层蒙板
+        let maskLayer = CALayer()
+        //xib中的view不支持frame调整,获取avatarImageView的frame为0,0,0,0 
+        maskLayer.frame = CGRect(x: 0, y: 0, width: self.frame.width / 3, height: self.frame.width / 3)
         
+        //maskImage的CGImage
+        guard let maskImageRefrence = UIImage(named: "mask1")?.cgImage else {
+            print("image named:mask1 not found")
+            return
+        }
+        
+        maskLayer.contents = maskImageRefrence
+        
+        //为avatarImage设置mask
+        avatarImageView.layer.mask = maskLayer
+    }
+    
+    private func addTarget() {
         testButton1.addTarget(self, action: .testButton1Clicked, for: UIControlEvents.touchUpInside)
         testButton2.addTarget(self, action: .testButton2Clicked, for: UIControlEvents.touchUpInside)
     }
