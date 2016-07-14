@@ -15,6 +15,8 @@ class TotalListHandler: SimpleHandler {
 
 //MARK:- Router
 extension TotalListHandler {
-    
+    func showTestAnimation(from:SimpleController) {
+        AppRouter.instance.show(routerId: AppRouterID.testAnimation, type: ControllerShowType.push, fromController: from, animated: true, transitioning: nil, data: nil)
+    }
 
 }

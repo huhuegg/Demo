@@ -11,33 +11,37 @@ import SimpleFramework
 
 
 class TotalListController:SimpleController {
-    let kDemoControllerNum:Int = 10
     @IBOutlet weak var tableView: UITableView!
     
     var sideBarView:SideBarView?
     
+    var tabViewData:Array<String> = Array()
+    
     override func initView() {
         self.navigationController?.navigationBar.isHidden = true
-
         addSideBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initTableViewData()
         initView()
     }
 
+    func initTableViewData() {
+        tabViewData.append("TestAnimation")
+    }
 }
 
 
 extension TotalListController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return kDemoControllerNum
+        return tabViewData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = "row:\(indexPath.row)"
+        cell.textLabel?.text = tabViewData[indexPath.row]
         return cell
     }
     
@@ -53,7 +57,10 @@ extension TotalListController:UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)")
+        print("didSelectRow:\(indexPath.row) title:\(tabViewData[indexPath.row])")
+        if indexPath.row == 0 {
+            (handler as! TotalListHandler).showTestAnimation(from: self)
+        }
     }
 }
 
@@ -65,7 +72,7 @@ private extension TotalListController{
 //SideBar
 extension TotalListController:SideBarViewProtocol {
     func addSideBar() {
-        sideBarView = SideBarView.addSideBar(parentCtl: self, edges: .left, widthPercent: 0.7)
+        sideBarView = SideBarView.addSideBar(parentCtl: self, edges: .left, widthPercent: 0.6)
         sideBarView?.initView(data: nil)
     }
     

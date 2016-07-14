@@ -32,6 +32,7 @@ class SideBarView: UIView {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var testButton1: UIButton!
     @IBOutlet weak var testButton2: UIButton!
+
     
     //SideBarViewProtocol
     var delegate:SideBarViewProtocol?
@@ -127,6 +128,7 @@ class SideBarView: UIView {
     
     //创建图层蒙板(不规则边框头像)
     private func maskAvatar() {
+        //mask遮罩，只有透明度信息有用，颜色信息是被忽略的
         let maskLayer = CALayer()
         //xib中的view不支持frame调整,获取avatarImageView的frame为0,0,0,0 
         maskLayer.frame = CGRect(x: 0, y: 0, width: self.frame.width / 3, height: self.frame.width / 3)
@@ -139,8 +141,13 @@ class SideBarView: UIView {
         
         maskLayer.contents = maskImageRefrence
         
+        //设置头像图层边框
+        maskLayer.borderColor = UIColor.white().cgColor
+        maskLayer.borderWidth = 1.0
+        
         //为avatarImage设置mask
         avatarImageView.layer.mask = maskLayer
+        
     }
     
     private func addTarget() {
@@ -214,7 +221,7 @@ extension SideBarView {
     }
     
     private func openChanged(edges:UIRectEdge,progress:CGFloat) {
-        print("openChanged")
+        //print("openChanged")
 
         if edges == .left {
             self.frame.origin.x = (progress - 1) * self.view.frame.width
@@ -265,13 +272,13 @@ extension SideBarView {
             self.parentImageView!.frame.origin.x = parentImageViewX
             }, completion: { (_) in
                 self.isShow = true
-                self.delegate?.isShowed()
                 self.addShadow()
+                self.sideBarShowed()
         })
     }
     
     private func closeChanged(edges:UIRectEdge,progress:CGFloat) {
-        print("closeChanged")
+        //print("closeChanged")
         var newX:CGFloat = 0.0
         var parentImageViewX:CGFloat = 0.0
         
@@ -336,10 +343,19 @@ extension SideBarView {
             self.parentImageView!.frame.origin.x = parentImageViewX
             }, completion: { (_) in
                 self.isShow = false
-                self.delegate?.isHidden()
                 self.clearShadow()
                 self.removeParentImageView()
+                self.sideBarClosed()
         })
+    }
+    
+    private func sideBarShowed() {
+        self.delegate?.isShowed()
+        
+    }
+    
+    private func sideBarClosed() {
+        self.delegate?.isHidden()
     }
 }
 

@@ -17,6 +17,7 @@ enum AppRootViewControllerType {
 
 enum AppRouterID {
     case totalList
+    case testAnimation
 }
 
 class AppRouter: NSObject {
@@ -39,16 +40,19 @@ class AppRouter: NSObject {
     
     //TODO:- 定义所有Handler
     var totalListHandler:TotalListHandler!
-
+    var testAnimationHandler:TestAnimationHandler!
 
     private func initHandlers() {
         totalListHandler = SimpleRouter.create(name: "TotalList") as! TotalListHandler
+        testAnimationHandler = SimpleRouter.create(name: "TestAnimation") as! TestAnimationHandler
     }
     
     private func getHandler(routerId:AppRouterID)->SimpleHandler? {
         switch routerId {
         case .totalList:
             return totalListHandler
+        case .testAnimation:
+            return testAnimationHandler
         }
     }
 

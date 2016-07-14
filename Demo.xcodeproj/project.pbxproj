@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840E369E1D37704200863EB7 /* TestAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E369D1D37704200863EB7 /* TestAnimationController.swift */; };
+		840E36A01D37706200863EB7 /* TestAnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E369F1D37706200863EB7 /* TestAnimationHandler.swift */; };
 		843EEE281D2E3E4E00217A30 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843EEE271D2E3E4E00217A30 /* QuartzCore.framework */; };
 		843EEE2E1D2E541B00217A30 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843EEE2D1D2E541B00217A30 /* SideBarView.swift */; };
 		843EEE301D2E544300217A30 /* SideBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843EEE2F1D2E544300217A30 /* SideBarView.xib */; };
@@ -19,6 +21,7 @@
 		84925EC21D2CAA7F000ADC9F /* TotalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84925EC11D2CAA7F000ADC9F /* TotalListController.swift */; };
 		84925ECA1D2CAFB7000ADC9F /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84925EC91D2CAFB7000ADC9F /* AppRouter.swift */; };
 		84925ECC1D2CB069000ADC9F /* TotalListHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84925ECB1D2CB069000ADC9F /* TotalListHandler.swift */; };
+		84E2D6AC1D3627A500EF46B3 /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D6AB1D3627A500EF46B3 /* MenuButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		840E369D1D37704200863EB7 /* TestAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestAnimationController.swift; path = Controller/TestAnimationController.swift; sourceTree = "<group>"; };
+		840E369F1D37706200863EB7 /* TestAnimationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestAnimationHandler.swift; path = Handler/TestAnimationHandler.swift; sourceTree = "<group>"; };
 		843EEE271D2E3E4E00217A30 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		843EEE2D1D2E541B00217A30 /* SideBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		843EEE2F1D2E544300217A30 /* SideBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideBarView.xib; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 		84925EC11D2CAA7F000ADC9F /* TotalListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListController.swift; path = Controller/TotalListController.swift; sourceTree = "<group>"; };
 		84925EC91D2CAFB7000ADC9F /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		84925ECB1D2CB069000ADC9F /* TotalListHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListHandler.swift; path = Handler/TotalListHandler.swift; sourceTree = "<group>"; };
+		84E2D6AB1D3627A500EF46B3 /* MenuButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,22 @@
 			name = "侧边栏";
 			sourceTree = "<group>";
 		};
+		840E369B1D376FF300863EB7 /* TestAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				840E369D1D37704200863EB7 /* TestAnimationController.swift */,
+				840E369F1D37706200863EB7 /* TestAnimationHandler.swift */,
+			);
+			name = TestAnimation;
+			sourceTree = "<group>";
+		};
+		841B38E61D36164E00DDD1A5 /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThirdPart;
+			sourceTree = "<group>";
+		};
 		843EEE261D2E3E4E00217A30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +138,7 @@
 		844BA7341D2E104500F11E76 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				84E2D6AB1D3627A500EF46B3 /* MenuButtonView.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -151,6 +174,7 @@
 		84925EA21D2CA8D1000ADC9F /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				841B38E61D36164E00DDD1A5 /* ThirdPart */,
 				84925EB91D2CAA2B000ADC9F /* AppBase */,
 				84925EBE1D2CAA30000ADC9F /* Module */,
 				843EEE2C1D2E53A300217A30 /* View */,
@@ -180,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				84925EC01D2CAA6D000ADC9F /* TotalList */,
+				840E369B1D376FF300863EB7 /* TestAnimation */,
 			);
 			name = Module;
 			sourceTree = "<group>";
@@ -307,8 +332,11 @@
 				843EEE2E1D2E541B00217A30 /* SideBarView.swift in Sources */,
 				84925EC21D2CAA7F000ADC9F /* TotalListController.swift in Sources */,
 				84925EBC1D2CAA2B000ADC9F /* AppDelegate.swift in Sources */,
+				840E36A01D37706200863EB7 /* TestAnimationHandler.swift in Sources */,
+				84E2D6AC1D3627A500EF46B3 /* MenuButtonView.swift in Sources */,
 				84925ECA1D2CAFB7000ADC9F /* AppRouter.swift in Sources */,
 				84925ECC1D2CB069000ADC9F /* TotalListHandler.swift in Sources */,
+				840E369E1D37704200863EB7 /* TestAnimationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
