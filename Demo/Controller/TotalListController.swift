@@ -69,6 +69,7 @@ private extension TotalListController{
 
 }
 
+
 //SideBar
 extension TotalListController:SideBarViewProtocol {
     func addSideBar() {

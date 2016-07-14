@@ -258,7 +258,7 @@ class MenuButtonView: UIButton {
         
         let thirdGroupAnimation = CAAnimationGroup()
         thirdGroupAnimation.animations = [thirdLayerAnimation,thirdLayerWidthAnimation]
-        thirdGroupAnimation.duration = 1
+        thirdGroupAnimation.duration = duration
         
         thirdGroupAnimation.isRemovedOnCompletion = false
         thirdGroupAnimation.fillMode = kCAFillModeForwards
