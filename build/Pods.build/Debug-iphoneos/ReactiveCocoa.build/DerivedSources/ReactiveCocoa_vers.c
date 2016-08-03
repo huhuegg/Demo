@@ -1,0 +1,1 @@
+ const unsigned char ReactiveCocoaVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:ReactiveCocoa  PROJECT:Pods-1" "\n"; const double ReactiveCocoaVersionNumber __attribute__ ((used)) = (double)1.;

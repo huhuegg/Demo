@@ -12,8 +12,10 @@
 		843EEE281D2E3E4E00217A30 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843EEE271D2E3E4E00217A30 /* QuartzCore.framework */; };
 		843EEE2E1D2E541B00217A30 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843EEE2D1D2E541B00217A30 /* SideBarView.swift */; };
 		843EEE301D2E544300217A30 /* SideBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843EEE2F1D2E544300217A30 /* SideBarView.xib */; };
-		844BA7401D2E2E8D00F11E76 /* SimpleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844BA73D1D2E2E6E00F11E76 /* SimpleFramework.framework */; };
-		844BA7411D2E2E8D00F11E76 /* SimpleFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 844BA73D1D2E2E6E00F11E76 /* SimpleFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		848AD3E21D4F267300293B01 /* DemoObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AD3E11D4F267300293B01 /* DemoObject.swift */; };
+		848AD3E51D4F272000293B01 /* DemoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AD3E41D4F272000293B01 /* DemoEntity.swift */; };
+		848AD3E71D4F285000293B01 /* AppCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AD3E61D4F285000293B01 /* AppCoreData.swift */; };
+		848AD3EA1D4F38A800293B01 /* DemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AD3E91D4F38A800293B01 /* DemoModel.swift */; };
 		84925EA91D2CA8D2000ADC9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84925EA71D2CA8D2000ADC9F /* Main.storyboard */; };
 		84925EAB1D2CA8D2000ADC9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84925EAA1D2CA8D2000ADC9F /* Assets.xcassets */; };
 		84925EAE1D2CA8D2000ADC9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84925EAC1D2CA8D2000ADC9F /* LaunchScreen.storyboard */; };
@@ -21,32 +23,10 @@
 		84925EC21D2CAA7F000ADC9F /* TotalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84925EC11D2CAA7F000ADC9F /* TotalListController.swift */; };
 		84925ECA1D2CAFB7000ADC9F /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84925EC91D2CAFB7000ADC9F /* AppRouter.swift */; };
 		84925ECC1D2CB069000ADC9F /* TotalListHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84925ECB1D2CB069000ADC9F /* TotalListHandler.swift */; };
+		84BB6AD01D4F06C400EA09BE /* Demo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84BB6ACE1D4F06C400EA09BE /* Demo.xcdatamodeld */; };
+		84D31F111D5042A5005F4354 /* SimpleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D31F0A1D5042A5005F4354 /* SimpleFramework.framework */; };
 		84E2D6AC1D3627A500EF46B3 /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2D6AB1D3627A500EF46B3 /* MenuButtonView.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		844BA73C1D2E2E6E00F11E76 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 844BA7371D2E2E6E00F11E76 /* SimpleFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 845793281D17E8AB008C33CD;
-			remoteInfo = SimpleFramework;
-		};
-		844BA73E1D2E2E6E00F11E76 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 844BA7371D2E2E6E00F11E76 /* SimpleFramework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84E737161D1953DD0003A16F;
-			remoteInfo = SimpleFrameworkDemo;
-		};
-		844BA7421D2E2E8D00F11E76 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 844BA7371D2E2E6E00F11E76 /* SimpleFramework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 845793271D17E8AB008C33CD;
-			remoteInfo = SimpleFramework;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		844BA7441D2E2E8D00F11E76 /* Embed Frameworks */ = {
@@ -55,7 +35,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				844BA7411D2E2E8D00F11E76 /* SimpleFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,12 +42,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		498D92C78E89E6055F1662F9 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		840E369D1D37704200863EB7 /* TestAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestAnimationController.swift; path = Controller/TestAnimationController.swift; sourceTree = "<group>"; };
 		840E369F1D37706200863EB7 /* TestAnimationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestAnimationHandler.swift; path = Handler/TestAnimationHandler.swift; sourceTree = "<group>"; };
 		843EEE271D2E3E4E00217A30 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		843EEE2D1D2E541B00217A30 /* SideBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		843EEE2F1D2E544300217A30 /* SideBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideBarView.xib; sourceTree = "<group>"; };
-		844BA7371D2E2E6E00F11E76 /* SimpleFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimpleFramework.xcodeproj; path = ../SimpleFramework/SimpleFramework/SimpleFramework.xcodeproj; sourceTree = "<group>"; };
+		84792A981D4F5D72001EFC5C /* SugarRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SugarRecord.framework; path = "Pods/../build/Debug-iphoneos/SugarRecord.framework"; sourceTree = "<group>"; };
+		848AD3E11D4F267300293B01 /* DemoObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoObject.swift; sourceTree = "<group>"; };
+		848AD3E41D4F272000293B01 /* DemoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoEntity.swift; sourceTree = "<group>"; };
+		848AD3E61D4F285000293B01 /* AppCoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoreData.swift; sourceTree = "<group>"; };
+		848AD3E91D4F38A800293B01 /* DemoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoModel.swift; sourceTree = "<group>"; };
 		84925EA01D2CA8D1000ADC9F /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84925EA81D2CA8D2000ADC9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84925EAA1D2CA8D2000ADC9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +62,8 @@
 		84925EC11D2CAA7F000ADC9F /* TotalListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListController.swift; path = Controller/TotalListController.swift; sourceTree = "<group>"; };
 		84925EC91D2CAFB7000ADC9F /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		84925ECB1D2CB069000ADC9F /* TotalListHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListHandler.swift; path = Handler/TotalListHandler.swift; sourceTree = "<group>"; };
+		84BB6ACF1D4F06C400EA09BE /* Demo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demo.xcdatamodel; sourceTree = "<group>"; };
+		84D31F0A1D5042A5005F4354 /* SimpleFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SimpleFramework.framework; sourceTree = "<group>"; };
 		84E2D6AB1D3627A500EF46B3 /* MenuButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				843EEE281D2E3E4E00217A30 /* QuartzCore.framework in Frameworks */,
-				844BA7401D2E2E8D00F11E76 /* SimpleFramework.framework in Frameworks */,
+				84D31F111D5042A5005F4354 /* SimpleFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +108,9 @@
 		843EEE261D2E3E4E00217A30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84792A981D4F5D72001EFC5C /* SugarRecord.framework */,
 				843EEE271D2E3E4E00217A30 /* QuartzCore.framework */,
+				498D92C78E89E6055F1662F9 /* Pods_Demo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,19 +131,17 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
-		844BA7381D2E2E6E00F11E76 /* Products */ = {
+		848AD3E81D4F389500293B01 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				844BA73D1D2E2E6E00F11E76 /* SimpleFramework.framework */,
-				844BA73F1D2E2E6E00F11E76 /* SimpleFrameworkDemo.app */,
+				848AD3E91D4F38A800293B01 /* DemoModel.swift */,
 			);
-			name = Products;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		84925E971D2CA8D0000ADC9F = {
 			isa = PBXGroup;
 			children = (
-				844BA7371D2E2E6E00F11E76 /* SimpleFramework.xcodeproj */,
 				84925EB61D2CA984000ADC9F /* Framework */,
 				84925EA21D2CA8D1000ADC9F /* Demo */,
 				84925EA11D2CA8D1000ADC9F /* Products */,
@@ -174,6 +160,8 @@
 		84925EA21D2CA8D1000ADC9F /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				848AD3E81D4F389500293B01 /* Model */,
+				84D339451D4EFACA001122A8 /* CoreData */,
 				841B38E61D36164E00DDD1A5 /* ThirdPart */,
 				84925EB91D2CAA2B000ADC9F /* AppBase */,
 				84925EBE1D2CAA30000ADC9F /* Module */,
@@ -187,6 +175,7 @@
 		84925EB61D2CA984000ADC9F /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				84D31F091D5042A5005F4354 /* SimpleFramework */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -229,6 +218,41 @@
 			name = TotalList;
 			sourceTree = "<group>";
 		};
+		84BB6AD11D4F075500EA09BE /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				848AD3E41D4F272000293B01 /* DemoEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		84BB6AD21D4F075500EA09BE /* ManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				848AD3E11D4F267300293B01 /* DemoObject.swift */,
+			);
+			path = ManagedObjects;
+			sourceTree = "<group>";
+		};
+		84D31F091D5042A5005F4354 /* SimpleFramework */ = {
+			isa = PBXGroup;
+			children = (
+				84D31F0A1D5042A5005F4354 /* SimpleFramework.framework */,
+			);
+			path = SimpleFramework;
+			sourceTree = "<group>";
+		};
+		84D339451D4EFACA001122A8 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				848AD3E61D4F285000293B01 /* AppCoreData.swift */,
+				84BB6AD21D4F075500EA09BE /* ManagedObjects */,
+				84BB6AD11D4F075500EA09BE /* Entities */,
+				84BB6ACE1D4F06C400EA09BE /* Demo.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -236,15 +260,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84925EB21D2CA8D2000ADC9F /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
+				2079B873BAB9D8472E1D0B23 /* Check Pods Manifest.lock */,
 				84925E9C1D2CA8D1000ADC9F /* Sources */,
 				84925E9D1D2CA8D1000ADC9F /* Frameworks */,
 				84925E9E1D2CA8D1000ADC9F /* Resources */,
 				844BA7441D2E2E8D00F11E76 /* Embed Frameworks */,
+				F282014448EB64F84EDEB17B /* Embed Pods Frameworks */,
+				9E0CD79E2CCC7BEF426AB042 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				844BA7431D2E2E8D00F11E76 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -280,35 +306,12 @@
 			mainGroup = 84925E971D2CA8D0000ADC9F;
 			productRefGroup = 84925EA11D2CA8D1000ADC9F /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 844BA7381D2E2E6E00F11E76 /* Products */;
-					ProjectRef = 844BA7371D2E2E6E00F11E76 /* SimpleFramework.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				84925E9F1D2CA8D1000ADC9F /* Demo */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		844BA73D1D2E2E6E00F11E76 /* SimpleFramework.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SimpleFramework.framework;
-			remoteRef = 844BA73C1D2E2E6E00F11E76 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		844BA73F1D2E2E6E00F11E76 /* SimpleFrameworkDemo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = SimpleFrameworkDemo.app;
-			remoteRef = 844BA73E1D2E2E6E00F11E76 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		84925E9E1D2CA8D1000ADC9F /* Resources */ = {
@@ -324,31 +327,76 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2079B873BAB9D8472E1D0B23 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9E0CD79E2CCC7BEF426AB042 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F282014448EB64F84EDEB17B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		84925E9C1D2CA8D1000ADC9F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848AD3E71D4F285000293B01 /* AppCoreData.swift in Sources */,
 				843EEE2E1D2E541B00217A30 /* SideBarView.swift in Sources */,
 				84925EC21D2CAA7F000ADC9F /* TotalListController.swift in Sources */,
 				84925EBC1D2CAA2B000ADC9F /* AppDelegate.swift in Sources */,
+				848AD3EA1D4F38A800293B01 /* DemoModel.swift in Sources */,
+				848AD3E51D4F272000293B01 /* DemoEntity.swift in Sources */,
+				84BB6AD01D4F06C400EA09BE /* Demo.xcdatamodeld in Sources */,
 				840E36A01D37706200863EB7 /* TestAnimationHandler.swift in Sources */,
 				84E2D6AC1D3627A500EF46B3 /* MenuButtonView.swift in Sources */,
 				84925ECA1D2CAFB7000ADC9F /* AppRouter.swift in Sources */,
+				848AD3E21D4F267300293B01 /* DemoObject.swift in Sources */,
 				84925ECC1D2CB069000ADC9F /* TotalListHandler.swift in Sources */,
 				840E369E1D37704200863EB7 /* TestAnimationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		844BA7431D2E2E8D00F11E76 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SimpleFramework;
-			targetProxy = 844BA7421D2E2E8D00F11E76 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		84925EA71D2CA8D2000ADC9F /* Main.storyboard */ = {
@@ -467,6 +515,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Framework/CoreData",
+					"$(PROJECT_DIR)/Framework/SimpleFramework",
 				);
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Framework/SimpleFramework.framework/Headers\"";
 				INFOPLIST_FILE = Demo/Info.plist;
@@ -486,6 +538,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Framework/CoreData",
+					"$(PROJECT_DIR)/Framework/SimpleFramework",
 				);
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Framework/SimpleFramework.framework/Headers\"";
 				INFOPLIST_FILE = Demo/Info.plist;
@@ -519,6 +575,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84BB6ACE1D4F06C400EA09BE /* Demo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84BB6ACF1D4F06C400EA09BE /* Demo.xcdatamodel */,
+			);
+			currentVersion = 84BB6ACF1D4F06C400EA09BE /* Demo.xcdatamodel */;
+			path = Demo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84925E981D2CA8D1000ADC9F /* Project object */;
 }

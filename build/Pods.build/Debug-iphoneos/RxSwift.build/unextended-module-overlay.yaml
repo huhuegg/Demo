@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': '/Users/admin/Desktop/Demo/build/Debug-iphoneos/RxSwift.framework/Modules'
+    'contents': [{
+      'type': 'file',
+      'name': 'module.modulemap',
+      'external-contents': '/Users/admin/Desktop/Demo/build/Pods.build/Debug-iphoneos/RxSwift.build/unextended-module.modulemap',
+    }]
+  }]
+}

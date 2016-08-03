@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let status = AppRouter.instance.start(firstRouterId:AppRouterID.totalList,type: AppRootViewControllerType.navigationController,data: nil)
         print("AppRouter setup: \(status == true ? "success":"failed")")
         
-        
+        AppCoreData.insert
         return true
     }
 
