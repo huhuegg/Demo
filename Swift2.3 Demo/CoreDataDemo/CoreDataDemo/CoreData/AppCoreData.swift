@@ -10,6 +10,15 @@ import UIKit
 import CoreData
 import SugarRecord
 
+enum CoreDataDB {
+    case local
+    case icloud
+}
+
+enum CoreDataEntity {
+    case user
+}
+
 class AppCoreData: NSObject {
     private static let appCoreDataInstance = AppCoreData()
 
@@ -18,13 +27,19 @@ class AppCoreData: NSObject {
     }()
     
     private var dbName:String = "coreDataDB"
+    private var icloudName:String = "iCloudCoreDataDB"
     
-    var db:CoreDataDefaultStorage!
-    var icloudDb:CoreDataiCloudStorage?
+    private var iCloudContainer:String = "iCloud.\(NSBundle.mainBundle().bundleIdentifier!)"
+    
+    var localDB:CoreDataDefaultStorage?
+    var icloudDB:CoreDataiCloudStorage?
     
     override init() {
         super.init()
-        db = coreDataStorage()
+        localDB = coreDataStorage()
+//        if isIcloudDocumentsEnabled() {
+//            icloudDB = icloudStorage()
+//        }
     }
 
     // Initializing CoreDataDefaultStorage
@@ -36,65 +51,47 @@ class AppCoreData: NSObject {
         return defaultStorage
     }
     
+    
     // Initializes the CoreDataiCloudStorage
     func icloudStorage() -> CoreDataiCloudStorage? {
         let bundle = NSBundle(forClass: self.classForCoder)
         let model = CoreData.ObjectModel.Merged([bundle])
-        let icloudConfig = ICloudConfig(ubiquitousContentName: dbName, ubiquitousContentURL: "Path/", ubiquitousContainerIdentifier: "com.company.MyApp.anothercontainer")
-        
+        let icloudConfig = ICloudConfig(ubiquitousContentName: icloudName, ubiquitousContentURL: "path/", ubiquitousContainerIdentifier: iCloudContainer)
+
         do {
             return try CoreDataiCloudStorage(model: model, iCloud: icloudConfig)
         } catch {
+            print("CoreDataiCloudStorage init failed")
             return nil
         }
     }
-}
 
-//MARK:- User
-extension AppCoreData {
-    func insertUser(user:User) {
-        print("## CoreData ## insertDemoModel")
-        do {
-            try db.operation({ (context, save) -> () in
-                let entity:UserEntity = try! context.new()
-                entity.convertFromModel(user)
-
-                try! context.insert(entity)
-                save()
-            })
-        } catch {
-            
+    func isIcloudDocumentsEnabled()->Bool {
+        if let _ = NSFileManager.defaultManager().URLForUbiquityContainerIdentifier(iCloudContainer) {
+            return true
+        } else {
+            return false
         }
     }
     
-    func fetchUsers(completedHandler:(users:Array<User>?)->()) {
-        print("## CoreData ## fetchAllUsers")
-        try! db.operation({ (context, save) -> () in
-            let entities = try! context.request(UserEntity.self).fetch()
-            var users:Array<User> = Array()
-            for entity in entities {
-                let user = entity.convertToModel()
-                users.append(user)
-            }
-            completedHandler(users: users)
-        })
-
+    func db(type:CoreDataDB)->Storage? {
+        switch type {
+        case .local:
+            return localDB
+        case .icloud:
+            return icloudDB
+        }
     }
     
-    func findUser(filter:String,value:String,completedHandler:(user:User?)->()) {
-        print("## CoreData ## findUser: \(filter)=\(value)")
-        try! db.operation({ (context, save) -> () in
-            var user:User?
-            if let entity = try! context.request(UserEntity.self).filteredWith(filter, equalTo: value).fetch().first {
-                user = entity.convertToModel()
-            }
-            completedHandler(user: user)
-        })
+    private class func entityClass(coreDataEntity:CoreDataEntity) -> AnyClass {
+        switch  coreDataEntity {
+        case .user:
+            return UserEntity.classForCoder()
+        default:
+            return NSManagedObject.classForCoder()
+        }
     }
-}
-
-//MARK:- Other
-extension AppCoreData {
     
 }
+
 

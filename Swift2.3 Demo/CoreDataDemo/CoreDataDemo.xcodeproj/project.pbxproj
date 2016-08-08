@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2584DC4F44273DCAC2F3792F /* Pods_CoreDataDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001CD39A75A43E134DDF0B2C /* Pods_CoreDataDemo.framework */; };
+		8444F3DA1D5873AB007146BD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8444F3D91D5873AB007146BD /* CloudKit.framework */; };
+		8444F3DD1D587675007146BD /* ICloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F3DC1D587675007146BD /* ICloud.swift */; };
 		844BE5C11D51B95F005E3D5E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844BE5C01D51B95F005E3D5E /* CoreData.framework */; };
 		849668A31D5046CE007EC8A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849668A21D5046CE007EC8A6 /* AppDelegate.swift */; };
 		849668A51D5046CE007EC8A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849668A41D5046CE007EC8A6 /* ViewController.swift */; };
@@ -23,6 +25,9 @@
 
 /* Begin PBXFileReference section */
 		001CD39A75A43E134DDF0B2C /* Pods_CoreDataDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDataDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		841A1AB71D548D8300930064 /* CoreDataDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CoreDataDemo.entitlements; sourceTree = "<group>"; };
+		8444F3D91D5873AB007146BD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		8444F3DC1D587675007146BD /* ICloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICloud.swift; sourceTree = "<group>"; };
 		844BE5C01D51B95F005E3D5E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8496689F1D5046CE007EC8A6 /* CoreDataDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849668A21D5046CE007EC8A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8444F3DA1D5873AB007146BD /* CloudKit.framework in Frameworks */,
 				844BE5C11D51B95F005E3D5E /* CoreData.framework in Frameworks */,
 				2584DC4F44273DCAC2F3792F /* Pods_CoreDataDemo.framework in Frameworks */,
 			);
@@ -65,9 +71,18 @@
 		5C2F980C5851E29A0DD24199 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8444F3D91D5873AB007146BD /* CloudKit.framework */,
 				001CD39A75A43E134DDF0B2C /* Pods_CoreDataDemo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8444F3DB1D587614007146BD /* Cloud */ = {
+			isa = PBXGroup;
+			children = (
+				8444F3DC1D587675007146BD /* ICloud.swift */,
+			);
+			path = Cloud;
 			sourceTree = "<group>";
 		};
 		849668961D5046CE007EC8A6 = {
@@ -92,7 +107,9 @@
 		849668A11D5046CE007EC8A6 /* CoreDataDemo */ = {
 			isa = PBXGroup;
 			children = (
+				841A1AB71D548D8300930064 /* CoreDataDemo.entitlements */,
 				849668CB1D5047F5007EC8A6 /* Model */,
+				8444F3DB1D587614007146BD /* Cloud */,
 				849668C21D50479F007EC8A6 /* CoreData */,
 				849668A21D5046CE007EC8A6 /* AppDelegate.swift */,
 				849668A41D5046CE007EC8A6 /* ViewController.swift */,
@@ -175,6 +192,11 @@
 					8496689E1D5046CE007EC8A6 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 9M6475P28E;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -264,6 +286,7 @@
 			files = (
 				849668C81D50479F007EC8A6 /* AppCoreData.swift in Sources */,
 				849668D01D5049FD007EC8A6 /* Demo.xcdatamodeld in Sources */,
+				8444F3DD1D587675007146BD /* ICloud.swift in Sources */,
 				849668A51D5046CE007EC8A6 /* ViewController.swift in Sources */,
 				84AADB3B1D5201DE0012D510 /* UserEntity+CoreDataProperties.swift in Sources */,
 				84AADB3A1D5201DE0012D510 /* UserEntity.swift in Sources */,
@@ -385,7 +408,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CoreDataDemo/CoreDataDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -397,6 +422,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = app.CoreDataDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -408,7 +434,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CoreDataDemo/CoreDataDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -420,6 +448,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = app.CoreDataDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

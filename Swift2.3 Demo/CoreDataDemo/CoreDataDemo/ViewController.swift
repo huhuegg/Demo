@@ -23,28 +23,42 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        findUser("8")
-        
+//        findUser("8")
+//        removeUser("9")
+//        
+//        changeUserName("name6", to: "~~ name6 ~~")
+//        fetchUsers()
     }
 }
 
 extension ViewController {
     func fetchUsers() {
-        AppCoreData.instance.fetchUsers { (users) in
+        
+        UserEntity.fetchUsersOrderByNameDESC { (users) in
             if let users = users {
                 for user in users  {
                     print("sid:\(user.sid) name:\(user.name)")
                 }
+                print("FetchUsers count:\(users.count)")
             }
             
         }
     }
     
     func findUser(sid:String) {
-        AppCoreData.instance.findUser("sid", value: sid) { (user) in
+        UserEntity.find("sid", value: sid) { (user) in
             if let user = user {
                 print("sid:\(user.sid) name:\(user.name)")
             }
         }
+    }
+    
+    func removeUser(sid:String) {
+        UserEntity.remove(sid)
+    }
+    
+    func changeUserName(from:String, to:String) {
+        let predicate = NSPredicate(format: "name == %@",from)
+        UserEntity.change(predicate, name: to)
     }
 }
