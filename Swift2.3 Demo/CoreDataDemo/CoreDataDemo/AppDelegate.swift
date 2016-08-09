@@ -16,15 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //MARK:- 本地CoreData测试
-        //清空user
-        UserEntity.clear()
-        
-        //添加测试数据
-        for i in 1..<10 {
-            let user = User(sid: "\(i)", name: "name\(i)", info: "info\(i)")
-            UserEntity.insert(user)
-        }
-        
+//        //清空user
+//        UserEntity.clear()
+//        
+//        //添加测试数据
+//        for i in 1..<10 {
+//            let user = User(sid: "\(i)", name: "name\(i)", info: "info\(i)")
+//            UserEntity.insert(user)
+//        }
+//        
         
         //CloudKit测试
         let newPublicUser = User(sid: "i3", name: "insertToPublic", info: "iCloud")
@@ -39,18 +39,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
     
-        let newPrivateUser = User(sid: "i5", name: "insertToPrivate", info: "iCloud")
-        ICloudUser.addUser(newPrivateUser, isPrivate: true) { (status) in
-            
-            ICloudUser.fetchInfoIs("iCloud", isPrivate: true, completionCallback: { (users) in
-                if let users = users {
-                    print("private user count: \(users.count)")
-                    for user in users {
-                        print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
-                    }
-                }
-            })
-        }
+//        let newPrivateUser = User(sid: "i51", name: "insertToPrivate111", info: "iCloud")
+//        ICloudUser.addUser(newPrivateUser, isPrivate: true) { (status) in
+//            
+//            ICloudUser.fetchInfoIs("iCloud", isPrivate: true, completionCallback: { (users) in
+//                if let users = users {
+//                    print("private user count: \(users.count)")
+//                    for user in users {
+//                        print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
+//                    }
+//                }
+//            })
+//        }
 
         return true
     }

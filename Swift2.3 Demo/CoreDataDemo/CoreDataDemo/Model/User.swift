@@ -13,7 +13,7 @@ class User: NSObject {
     var name:String!
     var info:String!
 
-    var imageUrl:String = ""
+    var imageUrl:String = "http://www.appcoda.com/wp-content/uploads/2016/01/beginner-ios9-book-400.jpg"
     
     init(sid:String,name:String,info:String) {
         super.init()

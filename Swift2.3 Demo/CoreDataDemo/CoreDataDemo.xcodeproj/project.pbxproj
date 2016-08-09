@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2584DC4F44273DCAC2F3792F /* Pods_CoreDataDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001CD39A75A43E134DDF0B2C /* Pods_CoreDataDemo.framework */; };
+		841F6C791D59CDD200592703 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F6C781D59CDD200592703 /* MD5.swift */; };
 		8444F3DA1D5873AB007146BD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8444F3D91D5873AB007146BD /* CloudKit.framework */; };
 		8444F3DD1D587675007146BD /* ICloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F3DC1D587675007146BD /* ICloud.swift */; };
 		844BE5C11D51B95F005E3D5E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844BE5C01D51B95F005E3D5E /* CoreData.framework */; };
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		001CD39A75A43E134DDF0B2C /* Pods_CoreDataDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreDataDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841A1AB71D548D8300930064 /* CoreDataDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CoreDataDemo.entitlements; sourceTree = "<group>"; };
+		841F6C741D59CD2000592703 /* CoreDataDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreDataDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		841F6C781D59CDD200592703 /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		8444F3D91D5873AB007146BD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8444F3DC1D587675007146BD /* ICloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICloud.swift; sourceTree = "<group>"; };
 		844BE5C01D51B95F005E3D5E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -117,6 +120,8 @@
 				849668A91D5046CE007EC8A6 /* Assets.xcassets */,
 				849668AB1D5046CE007EC8A6 /* LaunchScreen.storyboard */,
 				849668AE1D5046CE007EC8A6 /* Info.plist */,
+				841F6C741D59CD2000592703 /* CoreDataDemo-Bridging-Header.h */,
+				841F6C781D59CDD200592703 /* MD5.swift */,
 			);
 			path = CoreDataDemo;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				8444F3DD1D587675007146BD /* ICloud.swift in Sources */,
 				849668A51D5046CE007EC8A6 /* ViewController.swift in Sources */,
 				84AADB3B1D5201DE0012D510 /* UserEntity+CoreDataProperties.swift in Sources */,
+				841F6C791D59CDD200592703 /* MD5.swift in Sources */,
 				84AADB3A1D5201DE0012D510 /* UserEntity.swift in Sources */,
 				849668CD1D5047F5007EC8A6 /* User.swift in Sources */,
 				849668A31D5046CE007EC8A6 /* AppDelegate.swift in Sources */,
@@ -408,6 +414,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoreDataDemo/CoreDataDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -423,6 +430,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.CoreDataDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoreDataDemo/CoreDataDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -434,6 +443,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CoreDataDemo/CoreDataDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -449,6 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.CoreDataDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CoreDataDemo/CoreDataDemo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

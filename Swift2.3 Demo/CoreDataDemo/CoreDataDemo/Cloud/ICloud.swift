@@ -37,6 +37,9 @@ class ICloud {
 
 
 class ICloudUser: NSObject {
+    /**
+     根据info信息查询匹配的User
+    */
     class func fetchInfoIs(info:String,isPrivate:Bool,completionCallback:(users:Array<User>?)->()) {
         let recordType = "ICloudUserEntity"
         let predicate = NSPredicate(format: "info == %@", info)
@@ -70,6 +73,7 @@ class ICloudUser: NSObject {
         }
     }
     
+    //添加User
     class func addUser(user:User,isPrivate:Bool,completionCallback:(status:Bool)->()) {
         let recordType = "ICloudUserEntity"
         let recordName = String(format: "%f", NSDate.timeIntervalSinceReferenceDate()).componentsSeparatedByString(".")[0]
@@ -81,6 +85,29 @@ class ICloudUser: NSObject {
         entity.setObject(user.name, forKey: "name")
         entity.setObject(user.info, forKey: "info")
         
+        if let imageUrl = NSURL(string: user.imageUrl) {
+            //实际使用中需要改为异步获取data
+            if let data = NSData(contentsOfURL: imageUrl) {
+                // 获取Caches目录路径
+                var paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+                if let cacheDirectory = paths[0] as? String {
+                    let filePath = "\(cacheDirectory)/\(data.MD5())"
+                    data.writeToFile(filePath, atomically: true)
+                    
+                    //注意使用 NSURL(fileURLWithPath: filePath) 而不是NSURL(string: filePath) 否则会有以下错误
+                    //*** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: 'Non-file URL'
+                    let fileUrl = NSURL(fileURLWithPath: filePath)
+                    
+                    //CKAsset必须使用本地的file url
+                    let imageAsset = CKAsset(fileURL: fileUrl)
+                    entity.setObject(imageAsset, forKey: "imageUrl")
+
+                }
+
+            }
+
+        }
+        
         let db = isPrivate == true ? ICloud.instance.privateDB : ICloud.instance.publicDB
         db.saveRecord(entity) { (record, error) in
             if error != nil {
@@ -89,6 +116,46 @@ class ICloudUser: NSObject {
                 return
             } else {
                 completionCallback(status: true)
+                return
+            }
+        }
+    }
+    
+    /**
+     更新User信息
+    */
+    class func updateUser(user:User,isPrivate:Bool,completionCallback:(status:Bool)->()) {
+        let recordType = "ICloudUserEntity"
+        let predicate = NSPredicate(format: "sid == %@", user.sid)
+        
+        // CKQuery 对象的创建需要一个record类型和一个判定条件作为参数，它们将用于查询
+        let query = CKQuery(recordType: recordType, predicate: predicate)
+        
+        let db = isPrivate == true ? ICloud.instance.privateDB : ICloud.instance.publicDB
+        db.performQuery(query, inZoneWithID: nil) { (icloudEntities, error) in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionCallback(status: false)
+                }
+            } else {
+                guard let icloudEntities = icloudEntities else {
+                    completionCallback(status: false)
+                    return
+                }
+
+                for icloudEntity in icloudEntities {
+                    icloudEntity.setValue(user.name, forKey: "name")
+                    icloudEntity.setValue(user.info, forKey: "info")
+                    db.saveRecord(icloudEntity, completionHandler: { (savedRecord, error) in
+                        if error == nil {
+                            completionCallback(status: true)
+                        } else {
+                            completionCallback(status: false)
+                        }
+                        return
+                    })
+                }
+                completionCallback(status: false)
                 return
             }
         }
