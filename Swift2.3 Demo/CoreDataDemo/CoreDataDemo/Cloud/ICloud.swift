@@ -33,10 +33,85 @@ class ICloud {
         // privateCloudDatabase是你个人的私密数据
         privateDB = container.privateCloudDatabase
     }
+    
+    /**
+     获取当前用户的CKRecordID
+     */
+    func fetchUserRecordID(completionCallback:(userRecordID:CKRecordID?,error:NSError?)->()) {
+        container.fetchUserRecordIDWithCompletionHandler { (userRecordID, err) in
+            if let err = err {
+                if err.code == CKErrorCode.NotAuthenticated.rawValue {
+                    print("fetchUserRecordID failed: NotAuthenticated")
+                } else {
+                    print("fetchUserRecordID failed: \(err)")
+                }
+            }
+            completionCallback(userRecordID: userRecordID, error: err)
+        }
+    }
+    
+    class func printRecordInfo(record:CKRecord) {
+
+//        let recordName = record.recordID.recordName
+//        let recordZoneName = record.recordID.zoneID.zoneName
+//        let recordOwnerName = record.recordID.zoneID.ownerName
+        
+        let creatorUserRecordName = record.creatorUserRecordID!.recordName
+        let creationDate = record.creationDate!
+        
+        let lastModifiedUserRecordName = record.lastModifiedUserRecordID!.recordName
+        let lastModificationDate = record.modificationDate!
+
+        //print("recordName:\(recordName) recordZoneName:\(recordZoneName) recordOwnerName:\(recordOwnerName) creatorUserRecordName:\(creatorUserRecordName) creationDate:\(creationDate) lastModifiedUserRecordName:\(lastModifiedUserRecordName) lastModificationDate:\(lastModificationDate)")
+        print("creatorUserRecordName:\(creatorUserRecordName) creationDate:\(creationDate) lastModifiedUserRecordName:\(lastModifiedUserRecordName) lastModificationDate:\(lastModificationDate)")
+    }
+    
+    
 }
 
 
 class ICloudUser: NSObject {
+    
+    /**
+     根据CKRecordID查询
+    */
+    class func fetchFromPublicDB(userRecordID:CKRecordID,completionCallback:(users:Array<User>?)->()) {
+        let recordType = "ICloudUserEntity"
+        
+        let reference = CKReference(recordID: userRecordID, action: .None)
+        let predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
+        
+        // CKQuery 对象的创建需要一个record类型和一个判定条件作为参数，它们将用于查询
+        let query = CKQuery(recordType: recordType, predicate: predicate)
+        
+        let db = ICloud.instance.publicDB
+        db.performQuery(query, inZoneWithID: nil) { (icloudEntities, error) in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionCallback(users: nil)
+                }
+            } else {
+                guard let icloudEntities = icloudEntities else {
+                    completionCallback(users: nil)
+                    return
+                }
+                var users:Array<User> = Array()
+                for icloudEntity in icloudEntities {
+                    ICloud.printRecordInfo(icloudEntity)
+                    
+                    let sid = icloudEntity.valueForKey("sid") as! String
+                    let name = icloudEntity.valueForKey("name") as! String
+                    let info = icloudEntity.valueForKey("info") as! String
+                    
+                    let user = User(sid: sid, name: name, info: info)
+                    users.append(user)
+                }
+                completionCallback(users: users)
+                return
+            }
+        }
+    }
+    
     /**
      根据info信息查询匹配的User
     */
@@ -60,6 +135,8 @@ class ICloudUser: NSObject {
                 }
                 var users:Array<User> = Array()
                 for icloudEntity in icloudEntities {
+                    ICloud.printRecordInfo(icloudEntity)
+                    
                     let sid = icloudEntity.valueForKey("sid") as! String
                     let name = icloudEntity.valueForKey("name") as! String
                     let info = icloudEntity.valueForKey("info") as! String
