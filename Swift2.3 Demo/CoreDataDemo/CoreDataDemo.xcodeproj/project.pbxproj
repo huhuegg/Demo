@@ -147,8 +147,8 @@
 		849668C41D50479F007EC8A6 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				84AADB381D5201DE0012D510 /* UserEntity.swift */,
 				84AADB391D5201DE0012D510 /* UserEntity+CoreDataProperties.swift */,
+				84AADB381D5201DE0012D510 /* UserEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";

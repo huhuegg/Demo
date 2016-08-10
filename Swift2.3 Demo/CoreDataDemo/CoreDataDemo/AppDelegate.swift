@@ -27,20 +27,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
         
         //CloudKit测试
+        ICloud.instance.isIcloudAvailable()
+        
         //publicDB
-        ICloud.instance.fetchUserRecordID { (userRecordID, error) in
-            if let userRecordID = userRecordID {
-                ICloudUser.fetchFromPublicDB(userRecordID, completionCallback: { (users) in
-                    if let users = users {
-                        print("fetchFromPublicDB userRecordName:\(userRecordID.recordName) count: \(users.count)")
-                        for user in users {
-                            print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
-                        }
-                    }
-                    
-                })
-            }
-        }
+//        ICloud.instance.fetchUserRecordID { (userRecordID, error) in
+//            if let userRecordID = userRecordID {
+//                ICloudUser.fetchFromPublicDB(userRecordID, completionCallback: { (users) in
+//                    if let users = users {
+//                        print("fetchFromPublicDB userRecordName:\(userRecordID.recordName) count: \(users.count)")
+//                        for user in users {
+//                            print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
+//                        }
+//                    }
+//                    
+//                })
+//            }
+//        }
         
 //        let newPublicUser = User(sid: "i3", name: "insertToPublic", info: "iCloud")
 //        ICloudUser.addUser(newPublicUser, isPrivate: false) { (status) in

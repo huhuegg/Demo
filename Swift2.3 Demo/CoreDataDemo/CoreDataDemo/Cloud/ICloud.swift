@@ -50,6 +50,20 @@ class ICloud {
         }
     }
     
+    /**
+     检查iCloud是否可用
+    */
+    func isIcloudAvailable() -> Bool{
+        //ubiquityIdentityToken is a new thing introduced by Apple to allow apps to check if the user is logged into icloud
+        if let _ = NSFileManager.defaultManager().ubiquityIdentityToken{
+            print("icloud avaliable")
+            return true
+        } else {
+            print("icloud unavaliable")
+            return false
+        }
+    }
+    
     class func printRecordInfo(record:CKRecord) {
 
 //        let recordName = record.recordID.recordName
