@@ -19,7 +19,7 @@ class UserEntity: NSManagedObject {
     }
     
     func convertToModel()->User {
-        let user = User(sid: self.sid!, name: self.name!, info: self.info!)
+        let user = User(sid: self.sid!, name: self.name!, avatar: self.info!)
         return user
     }
 

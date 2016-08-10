@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        LoginHandler.login()
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension LoginController {
     func fetchUsers() {
         
         UserEntity.fetchUsersOrderByNameDESC { (users) in

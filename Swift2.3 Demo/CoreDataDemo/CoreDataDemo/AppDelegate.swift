@@ -15,60 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //MARK:- 本地CoreData测试
-//        //清空user
-//        UserEntity.clear()
-//        
-//        //添加测试数据
-//        for i in 1..<10 {
-//            let user = User(sid: "\(i)", name: "name\(i)", info: "info\(i)")
-//            UserEntity.insert(user)
-//        }
-//        
-        
-        //CloudKit测试
-        ICloud.instance.isIcloudAvailable()
-        
-        //publicDB
-//        ICloud.instance.fetchUserRecordID { (userRecordID, error) in
-//            if let userRecordID = userRecordID {
-//                ICloudUser.fetchFromPublicDB(userRecordID, completionCallback: { (users) in
-//                    if let users = users {
-//                        print("fetchFromPublicDB userRecordName:\(userRecordID.recordName) count: \(users.count)")
-//                        for user in users {
-//                            print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
-//                        }
-//                    }
-//                    
-//                })
-//            }
-//        }
-        
-//        let newPublicUser = User(sid: "i3", name: "insertToPublic", info: "iCloud")
-//        ICloudUser.addUser(newPublicUser, isPrivate: false) { (status) in
-//            ICloudUser.fetchInfoIs("iCloud", isPrivate: false, completionCallback: { (users) in
-//                if let users = users {
-//                    print("public user count: \(users.count)")
-//                    for user in users {
-//                        print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
-//                    }
-//                }
-//            })
-//        }
-//    
-//        //privateDB
-//        let newPrivateUser = User(sid: "i51", name: "insertToPrivate111", info: "iCloud")
-//        ICloudUser.addUser(newPrivateUser, isPrivate: true) { (status) in
-//            
-//            ICloudUser.fetchInfoIs("iCloud", isPrivate: true, completionCallback: { (users) in
-//                if let users = users {
-//                    print("private user count: \(users.count)")
-//                    for user in users {
-//                        print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
-//                    }
-//                }
-//            })
-//        }
 
         return true
     }
@@ -98,3 +44,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+    func coreDataTest() {
+        //MARK:- 本地CoreData测试
+        
+        //清空user
+        UserEntity.clear()
+        
+        //添加测试数据
+        for i in 1..<10 {
+            let user = User(sid: "\(i)", name: "name\(i)", avatar: "http://www.appcoda.com/wp-content/uploads/2016/01/beginner-ios9-book-400.jpg")
+            UserEntity.insert(user)
+        }
+        
+    }
+    
+    
+    func cloudKitTest() {
+        //CloudKit测试
+        ICloud.instance.isIcloudAvailable()
+        
+        //publicDB
+        ICloud.instance.fetchUserRecordID { (userRecordID, error) in
+            if let userRecordID = userRecordID {
+                ICloudUser.fetchFromPublicDB(userRecordID, completionCallback: { (users) in
+                    if let users = users {
+                        print("fetchFromPublicDB userRecordName:\(userRecordID.recordName) count: \(users.count)")
+                        for user in users {
+                            print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
+                        }
+                    }
+                    
+                })
+            }
+        }
+        
+        let newPublicUser = User(sid: "i3", name: "insertToPublic", avatar: "http://www.appcoda.com/wp-content/uploads/2016/01/beginner-ios9-book-400.jpg")
+        ICloudUser.addUser(newPublicUser, isPrivate: false) { (status) in
+            ICloudUser.fetchInfoIs("iCloud", isPrivate: false, completionCallback: { (users) in
+                if let users = users {
+                    print("public user count: \(users.count)")
+                    for user in users {
+                        print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
+                    }
+                }
+            })
+        }
+        
+        //privateDB
+        let newPrivateUser = User(sid: "i51", name: "insertToPrivate111", avatar: "http://www.appcoda.com/wp-content/uploads/2016/01/beginner-ios9-book-400.jpg")
+        ICloudUser.addUser(newPrivateUser, isPrivate: true) { (status) in
+            
+            ICloudUser.fetchInfoIs("iCloud", isPrivate: true, completionCallback: { (users) in
+                if let users = users {
+                    print("private user count: \(users.count)")
+                    for user in users {
+                        print("sid:\(user.sid) name:\(user.name) info:\(user.info)")
+                    }
+                }
+            })
+        }
+
+    }
+}

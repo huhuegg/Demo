@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		2584DC4F44273DCAC2F3792F /* Pods_CoreDataDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001CD39A75A43E134DDF0B2C /* Pods_CoreDataDemo.framework */; };
 		841F6C791D59CDD200592703 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F6C781D59CDD200592703 /* MD5.swift */; };
+		841F6C7B1D5B134500592703 /* LoginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F6C7A1D5B134500592703 /* LoginHandler.swift */; };
 		8444F3DA1D5873AB007146BD /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8444F3D91D5873AB007146BD /* CloudKit.framework */; };
 		8444F3DD1D587675007146BD /* ICloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444F3DC1D587675007146BD /* ICloud.swift */; };
 		844BE5C11D51B95F005E3D5E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844BE5C01D51B95F005E3D5E /* CoreData.framework */; };
 		849668A31D5046CE007EC8A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849668A21D5046CE007EC8A6 /* AppDelegate.swift */; };
-		849668A51D5046CE007EC8A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849668A41D5046CE007EC8A6 /* ViewController.swift */; };
+		849668A51D5046CE007EC8A6 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849668A41D5046CE007EC8A6 /* LoginController.swift */; };
 		849668A81D5046CE007EC8A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849668A61D5046CE007EC8A6 /* Main.storyboard */; };
 		849668AA1D5046CE007EC8A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849668A91D5046CE007EC8A6 /* Assets.xcassets */; };
 		849668AD1D5046CE007EC8A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849668AB1D5046CE007EC8A6 /* LaunchScreen.storyboard */; };
@@ -29,12 +30,13 @@
 		841A1AB71D548D8300930064 /* CoreDataDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CoreDataDemo.entitlements; sourceTree = "<group>"; };
 		841F6C741D59CD2000592703 /* CoreDataDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreDataDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		841F6C781D59CDD200592703 /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
+		841F6C7A1D5B134500592703 /* LoginHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHandler.swift; sourceTree = "<group>"; };
 		8444F3D91D5873AB007146BD /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		8444F3DC1D587675007146BD /* ICloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICloud.swift; sourceTree = "<group>"; };
 		844BE5C01D51B95F005E3D5E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8496689F1D5046CE007EC8A6 /* CoreDataDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849668A21D5046CE007EC8A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		849668A41D5046CE007EC8A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		849668A41D5046CE007EC8A6 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		849668A71D5046CE007EC8A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		849668A91D5046CE007EC8A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		849668AC1D5046CE007EC8A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -115,7 +117,8 @@
 				8444F3DB1D587614007146BD /* Cloud */,
 				849668C21D50479F007EC8A6 /* CoreData */,
 				849668A21D5046CE007EC8A6 /* AppDelegate.swift */,
-				849668A41D5046CE007EC8A6 /* ViewController.swift */,
+				849668A41D5046CE007EC8A6 /* LoginController.swift */,
+				841F6C7A1D5B134500592703 /* LoginHandler.swift */,
 				849668A61D5046CE007EC8A6 /* Main.storyboard */,
 				849668A91D5046CE007EC8A6 /* Assets.xcassets */,
 				849668AB1D5046CE007EC8A6 /* LaunchScreen.storyboard */,
@@ -292,7 +295,8 @@
 				849668C81D50479F007EC8A6 /* AppCoreData.swift in Sources */,
 				849668D01D5049FD007EC8A6 /* Demo.xcdatamodeld in Sources */,
 				8444F3DD1D587675007146BD /* ICloud.swift in Sources */,
-				849668A51D5046CE007EC8A6 /* ViewController.swift in Sources */,
+				849668A51D5046CE007EC8A6 /* LoginController.swift in Sources */,
+				841F6C7B1D5B134500592703 /* LoginHandler.swift in Sources */,
 				84AADB3B1D5201DE0012D510 /* UserEntity+CoreDataProperties.swift in Sources */,
 				841F6C791D59CDD200592703 /* MD5.swift in Sources */,
 				84AADB3A1D5201DE0012D510 /* UserEntity.swift in Sources */,

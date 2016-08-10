@@ -35,6 +35,20 @@ class ICloud {
     }
     
     /**
+     检查iCloud当前是否可用
+     */
+    func isIcloudAvailable() -> Bool {
+        //ubiquityIdentityToken is a new thing introduced by Apple to allow apps to check if the user is logged into icloud
+        if let _ = NSFileManager.defaultManager().ubiquityIdentityToken{
+            print("icloud avaliable")
+            return true
+        } else {
+            print("icloud unavaliable")
+            return false
+        }
+    }
+    
+    /**
      获取当前用户的CKRecordID
      */
     func fetchUserRecordID(completionCallback:(userRecordID:CKRecordID?,error:NSError?)->()) {
@@ -50,20 +64,10 @@ class ICloud {
         }
     }
     
-    /**
-     检查iCloud是否可用
-    */
-    func isIcloudAvailable() -> Bool{
-        //ubiquityIdentityToken is a new thing introduced by Apple to allow apps to check if the user is logged into icloud
-        if let _ = NSFileManager.defaultManager().ubiquityIdentityToken{
-            print("icloud avaliable")
-            return true
-        } else {
-            print("icloud unavaliable")
-            return false
-        }
-    }
     
+    /**
+     debug
+    */
     class func printRecordInfo(record:CKRecord) {
 
 //        let recordName = record.recordID.recordName
@@ -84,8 +88,131 @@ class ICloud {
 }
 
 
-class ICloudUser: NSObject {
+class ICloudPostUser: NSObject {
+    /**
+     当前的用户的iCloud User ID
+    */
+    class func fetchUserRecordID(completionCallback:(userRecordID:CKRecordID?,error:NSError?)->()) {
+        ICloud.instance.fetchUserRecordID { (userRecordID, error) in
+            completionCallback(userRecordID: userRecordID, error: error)
+        }
+    }
     
+    /**
+     查询当前用户的PostUser信息
+    */
+    class func fetchUser(userRecordID:CKRecordID,completionCallback:(user:User?)->()) {
+        let recordType = "PostUsers"
+        
+        let reference = CKReference(recordID: userRecordID, action: .None)
+        let predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
+        
+        // CKQuery 对象的创建需要一个record类型和一个判定条件作为参数，它们将用于查询
+        let query = CKQuery(recordType: recordType, predicate: predicate)
+        
+        let db = ICloud.instance.privateDB
+        db.performQuery(query, inZoneWithID: nil) { (icloudEntities, error) in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionCallback(user: nil)
+                }
+            } else {
+                guard let icloudEntities = icloudEntities else {
+                    completionCallback(user: nil)
+                    return
+                }
+                
+                guard let record = icloudEntities.first else {
+                    completionCallback(user:nil)
+                    return
+                }
+                let sid = userRecordID.recordName
+                let avatar = record.valueForKey("avatar") as! String
+                let nickname = record.valueForKey("nickname") as! String
+                
+                let user = User(sid: sid, name: nickname, avatar: avatar)
+                completionCallback(user:user)
+                return
+            }
+        }
+    }
+
+    
+    /**
+     添加新的PostUser
+    */
+    class func newUser(user:User,completionCallback:(status:Bool)->()) {
+        let recordType = "PostUsers"
+        let recordName = String(format: "%f", NSDate.timeIntervalSinceReferenceDate()).componentsSeparatedByString(".")[0]
+        let recordID = CKRecordID(recordName: recordName)
+        
+        let record = CKRecord(recordType: recordType, recordID: recordID)
+
+        
+        record.setObject(user.imageUrl, forKey: "avatar")
+        record.setObject(user.name, forKey: "nickname")
+
+
+        let db = ICloud.instance.privateDB
+        db.saveRecord(record) { (record, error) in
+            if error != nil {
+                print("addUser failed:\(error!)")
+                completionCallback(status: false)
+                return
+            } else {
+                completionCallback(status: true)
+                return
+            }
+        }
+    }
+    
+    class func updateRecord(userRecordID:CKRecordID,user:User,completionCallback:(status:Bool)->()) {
+        let recordType = "PostUsers"
+        
+        let reference = CKReference(recordID: userRecordID, action: .None)
+        let predicate = NSPredicate(format: "creatorUserRecordID == %@", reference)
+        
+        // CKQuery 对象的创建需要一个record类型和一个判定条件作为参数，它们将用于查询
+        let query = CKQuery(recordType: recordType, predicate: predicate)
+        
+        let db = ICloud.instance.privateDB
+        db.performQuery(query, inZoneWithID: nil) { (icloudEntities, error) in
+            if error != nil {
+                print("query recordID failed:\(error!)")
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionCallback(status: false)
+                    return
+                }
+            } else {
+                guard let userRecords = icloudEntities else {
+                    completionCallback(status: false)
+                    return
+                }
+                guard let userRecord = userRecords.first else {
+                    completionCallback(status: false)
+                    return
+                }
+                
+                userRecord.setValue(user.name, forKey: "nickname")
+                userRecord.setValue(user.imageUrl, forKey: "avatar")
+                
+                let db = ICloud.instance.privateDB
+                db.saveRecord(userRecord) { (record, error) in
+                    if error != nil {
+                        print("update failed:\(error!)")
+                        completionCallback(status: false)
+                        return
+                    } else {
+                        completionCallback(status: true)
+                        return
+                    }
+                }
+            }
+        }
+    }
+}
+
+class ICloudUser: NSObject {
     /**
      根据CKRecordID查询
     */
@@ -112,12 +239,11 @@ class ICloudUser: NSObject {
                 var users:Array<User> = Array()
                 for icloudEntity in icloudEntities {
                     ICloud.printRecordInfo(icloudEntity)
-                    
-                    let sid = icloudEntity.valueForKey("sid") as! String
+                    let sid = userRecordID.recordName
                     let name = icloudEntity.valueForKey("name") as! String
                     let info = icloudEntity.valueForKey("info") as! String
                     
-                    let user = User(sid: sid, name: name, info: info)
+                    let user = User(sid: sid, name: name, avatar: info)
                     users.append(user)
                 }
                 completionCallback(users: users)
@@ -155,7 +281,7 @@ class ICloudUser: NSObject {
                     let name = icloudEntity.valueForKey("name") as! String
                     let info = icloudEntity.valueForKey("info") as! String
                     
-                    let user = User(sid: sid, name: name, info: info)
+                    let user = User(sid: sid, name: name, avatar: info)
                     users.append(user)
                 }
                 completionCallback(users: users)
