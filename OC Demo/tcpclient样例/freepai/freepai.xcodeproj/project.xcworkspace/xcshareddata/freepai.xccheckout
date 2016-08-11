@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>78F63A99-EC28-41B7-9C00-3EA0571EE547</string>
+	<key>IDESourceControlProjectName</key>
+	<string>freepai</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>00E7F2A2A0566619280792847639883E3D136A2F</key>
+		<string>ssh://222.73.60.153/~/newfreepai</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>freepai/freepai.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>00E7F2A2A0566619280792847639883E3D136A2F</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://222.73.60.153/~/newfreepai</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>00E7F2A2A0566619280792847639883E3D136A2F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>00E7F2A2A0566619280792847639883E3D136A2F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>newfreepai</string>
+		</dict>
+	</array>
+</dict>
+</plist>
