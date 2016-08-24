@@ -19,4 +19,8 @@ extension TotalListHandler {
         AppRouter.instance.show(routerId: AppRouterID.testAnimation, type: ControllerShowType.push, fromController: from, animated: true, transitioning: nil, data: nil)
     }
 
+    func showGradientLayer(from:SimpleController) {
+        AppRouter.instance.show(routerId: AppRouterID.gradientLayer, type: ControllerShowType.push, fromController: from, animated: true, transitioning: nil, data: nil)
+    }
+
 }

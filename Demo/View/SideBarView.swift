@@ -33,6 +33,8 @@ class SideBarView: UIView {
     @IBOutlet weak var testButton1: UIButton!
     @IBOutlet weak var testButton2: UIButton!
 
+    @IBOutlet weak var vStackView: UIStackView!
+    @IBOutlet var vButtons: [UIButton]!
     
     //SideBarViewProtocol
     var delegate:SideBarViewProtocol?
@@ -109,6 +111,9 @@ class SideBarView: UIView {
         setCorner()
         maskAvatar()
         addTarget()
+        
+        vStackView.frame = CGRect(x: 20, y: 200, width: 90, height: 200)
+        hideAllCollectionButtons()
     }
     
     //半边圆角或部分圆角
@@ -154,7 +159,9 @@ class SideBarView: UIView {
         testButton1.addTarget(self, action: .testButton1Clicked, for: UIControlEvents.touchUpInside)
         testButton2.addTarget(self, action: .testButton2Clicked, for: UIControlEvents.touchUpInside)
     }
+    
 }
+
 
 //MARK:- Selector
 private extension Selector {
@@ -169,6 +176,24 @@ extension SideBarView {
     
     func testButton2Clicked() {
         self.delegate?.sideBarRoute(data: ["key":"testButton2Clicked"])
+        showHideCollectionButtons()
+    }
+}
+
+//MARK:- Show/Hide CollectionButtons
+extension SideBarView {
+    private func hideAllCollectionButtons() {
+        self.vButtons.forEach({ (vButton) in
+            print("😊 vButton.Title: \(vButton.titleLabel!.text)")
+            vButton.isHidden = true
+        })
+    }
+    private func showHideCollectionButtons() {
+        UIView.animate(withDuration: 0.3) {
+            self.vButtons.forEach({ (vButton) in
+                vButton.isHidden = !vButton.isHidden
+            })
+        }
     }
 }
 

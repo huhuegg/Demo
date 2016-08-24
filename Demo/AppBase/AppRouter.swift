@@ -18,6 +18,7 @@ enum AppRootViewControllerType {
 enum AppRouterID {
     case totalList
     case testAnimation
+    case gradientLayer
 }
 
 class AppRouter: NSObject {
@@ -41,10 +42,12 @@ class AppRouter: NSObject {
     //TODO:- 定义所有Handler
     var totalListHandler:TotalListHandler!
     var testAnimationHandler:TestAnimationHandler!
+    var gradientLayerHandler:GradientLayerHandler!
 
     private func initHandlers() {
         totalListHandler = SimpleRouter.create(name: "TotalList") as! TotalListHandler
         testAnimationHandler = SimpleRouter.create(name: "TestAnimation") as! TestAnimationHandler
+        gradientLayerHandler = SimpleRouter.create(name: "GradientLayer") as! GradientLayerHandler
     }
     
     private func getHandler(routerId:AppRouterID)->SimpleHandler? {
@@ -53,6 +56,8 @@ class AppRouter: NSObject {
             return totalListHandler
         case .testAnimation:
             return testAnimationHandler
+        case .gradientLayer:
+            return gradientLayerHandler
         }
     }
 
@@ -138,6 +143,10 @@ extension AppRouter {
             print("==PRESENT== \(fromController.className()) -> \(toController.className())")
             
             try? SimpleRouter.show(type: type, fromController: fromController, toHandler: toHandler, animated: animated,transitioning:transitioning, data: data)
+        case .presentNavi:
+            print("==PRESENT Nav== TODO");
+        default:
+            break;
         }
     }
     

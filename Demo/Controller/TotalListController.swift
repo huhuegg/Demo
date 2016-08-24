@@ -30,6 +30,7 @@ class TotalListController:SimpleController {
 
     func initTableViewData() {
         tabViewData.append("TestAnimation")
+        tabViewData.append("GrandientLayer-渐变tableview")
     }
 }
 
@@ -53,13 +54,18 @@ extension TotalListController:UITableViewDataSource {
 
 extension TotalListController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        return 50.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRow:\(indexPath.row) title:\(tabViewData[indexPath.row])")
-        if indexPath.row == 0 {
-            (handler as! TotalListHandler).showTestAnimation(from: self)
+        print("didSelectRow:\(indexPath.row) title:\(self.tabViewData[indexPath.row])")
+        switch indexPath.row {
+        case 0:
+            (self.handler as! TotalListHandler).showTestAnimation(from: self)
+        case 1:
+            (self.handler as! TotalListHandler).showGradientLayer(from: self)
+        default:
+            break
         }
     }
 }

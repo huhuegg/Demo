@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F24b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -39,11 +38,33 @@
                                 <constraint firstAttribute="width" secondItem="7U5-tF-0am" secondAttribute="height" id="vac-vK-XWv"/>
                             </constraints>
                         </imageView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9mU-0V-f1c">
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phv-pz-D5z">
+                                    <state key="normal" title="B1"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6i-9p-eJE">
+                                    <state key="normal" title="B2"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pu-Qr-QGv">
+                                    <state key="normal" title="B3"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Se-Ze-K56">
+                                    <state key="normal" title="B4"/>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="aTO-SH-hyN"/>
+                                <constraint firstAttribute="height" constant="120" id="nAI-3L-5lH"/>
+                            </constraints>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="7U5-tF-0am" firstAttribute="width" secondItem="Rrk-ey-8uc" secondAttribute="width" multiplier="1:3" id="4Qf-AH-qWU"/>
                         <constraint firstItem="zP1-Ik-zte" firstAttribute="centerX" secondItem="Rrk-ey-8uc" secondAttribute="centerX" id="9gK-B3-LgM"/>
+                        <constraint firstItem="9mU-0V-f1c" firstAttribute="top" secondItem="zP1-Ik-zte" secondAttribute="bottom" constant="23" id="HDg-J8-8u0"/>
+                        <constraint firstItem="9mU-0V-f1c" firstAttribute="leading" secondItem="Rrk-ey-8uc" secondAttribute="leading" constant="173" id="M9H-Dm-1T0"/>
                         <constraint firstItem="7U5-tF-0am" firstAttribute="top" secondItem="Rrk-ey-8uc" secondAttribute="top" constant="60" id="OsF-HP-qUQ"/>
                         <constraint firstItem="7U5-tF-0am" firstAttribute="centerX" secondItem="Rrk-ey-8uc" secondAttribute="centerX" id="PSB-n8-zOf"/>
                         <constraint firstItem="n39-9K-B9y" firstAttribute="centerX" secondItem="Rrk-ey-8uc" secondAttribute="centerX" id="WlE-Bw-BPI"/>
@@ -63,9 +84,14 @@
                 <outlet property="avatarImageView" destination="7U5-tF-0am" id="5IO-s9-aqv"/>
                 <outlet property="testButton1" destination="n39-9K-B9y" id="9JT-LJ-MSf"/>
                 <outlet property="testButton2" destination="zP1-Ik-zte" id="s4J-M9-Lon"/>
+                <outlet property="vStackView" destination="9mU-0V-f1c" id="JX2-BZ-XVf"/>
                 <outlet property="view" destination="Rrk-ey-8uc" id="J7d-Rm-ldS"/>
+                <outletCollection property="vButtons" destination="phv-pz-D5z" collectionClass="NSMutableArray" id="MgW-iD-bia"/>
+                <outletCollection property="vButtons" destination="z6i-9p-eJE" collectionClass="NSMutableArray" id="fuo-fH-z0v"/>
+                <outletCollection property="vButtons" destination="6pu-Qr-QGv" collectionClass="NSMutableArray" id="9Pv-CJ-g4c"/>
+                <outletCollection property="vButtons" destination="6Se-Ze-K56" collectionClass="NSMutableArray" id="Le4-TJ-mHO"/>
             </connections>
-            <point key="canvasLocation" x="26.5" y="51.5"/>
+            <point key="canvasLocation" x="101" y="-86"/>
         </view>
     </objects>
     <resources>

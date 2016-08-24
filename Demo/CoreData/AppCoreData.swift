@@ -47,9 +47,7 @@ class AppCoreData: NSObject {
 }
 
 extension AppCoreData {
-    func insert(object:DemoModel) {
 
-    }
 }
 
 
