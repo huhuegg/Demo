@@ -10,12 +10,16 @@ import UIKit
 import SimpleFramework
 
 class GradientLayerController: SimpleController {
-    let gradientLayerCellIdentifier = "GradientLayerCell"
+    
+    //使用类名作为cell的identifier
+    let gradientLayerCellIdentifier = String(GradientLayerCell)
     
     var tabViewData:Array<String> = Array()
     
     override func initView() {
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        //从iOS7开始，系统为UINavigationController提供了一个interactivePopGestureRecognizer用于右滑返回(pop),但是，如果自定了back button或者隐藏了navigationBar，该手势就失效了,需要自行添加
+        self.addRecognizerOnNavigationController()
         
         let gradientFrame = CGRect(x: 0, y: view.frame.size.height - 200, width: view.frame.size.width, height: 200)
         
@@ -48,8 +52,19 @@ class GradientLayerController: SimpleController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initTableViewData()
         initView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func initTableViewData() {
@@ -65,6 +80,7 @@ class GradientLayerController: SimpleController {
         tabViewData.append("测试文本10")
     }
 }
+
 
 extension GradientLayerController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
