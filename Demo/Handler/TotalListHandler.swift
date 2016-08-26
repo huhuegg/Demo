@@ -23,4 +23,7 @@ extension TotalListHandler {
         AppRouter.instance.show(routerId: AppRouterID.gradientLayer, type: ControllerShowType.push, fromController: from, animated: true, transitioning: nil, data: nil)
     }
 
+    func showImageExif(from:SimpleController) {
+        AppRouter.instance.show(routerId: AppRouterID.imageExif, type: ControllerShowType.push, fromController: from, animated: true, transitioning: nil, data: nil)
+    }
 }

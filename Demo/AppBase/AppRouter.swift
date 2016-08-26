@@ -19,6 +19,7 @@ enum AppRouterID {
     case totalList
     case testAnimation
     case gradientLayer
+    case imageExif
 }
 
 class AppRouter: NSObject {
@@ -43,11 +44,13 @@ class AppRouter: NSObject {
     var totalListHandler:TotalListHandler!
     var testAnimationHandler:TestAnimationHandler!
     var gradientLayerHandler:GradientLayerHandler!
+    var imageExifHandler:ImageExifHandler!
 
     private func initHandlers() {
         totalListHandler = SimpleRouter.create(name: "TotalList") as! TotalListHandler
         testAnimationHandler = SimpleRouter.create(name: "TestAnimation") as! TestAnimationHandler
         gradientLayerHandler = SimpleRouter.create(name: "GradientLayer") as! GradientLayerHandler
+        imageExifHandler = SimpleRouter.create(name: "ImageExif") as! ImageExifHandler
     }
     
     private func getHandler(routerId:AppRouterID)->SimpleHandler? {
@@ -58,6 +61,8 @@ class AppRouter: NSObject {
             return testAnimationHandler
         case .gradientLayer:
             return gradientLayerHandler
+        case .imageExif:
+            return imageExifHandler
         }
     }
 

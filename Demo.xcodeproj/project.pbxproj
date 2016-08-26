@@ -22,6 +22,9 @@
 		849E3ABF1D6E946B00456A1C /* GradientLayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849E3ABE1D6E946B00456A1C /* GradientLayerCell.xib */; };
 		849E3AC11D6E948C00456A1C /* GradientLayerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E3AC01D6E948C00456A1C /* GradientLayerHandler.swift */; };
 		849E3AC31D6EA47300456A1C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849E3AC21D6EA47300456A1C /* Info.plist */; };
+		849E3AC61D6EF82C00456A1C /* ImageExifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E3AC51D6EF82C00456A1C /* ImageExifController.swift */; };
+		849E3AC81D6EF85000456A1C /* ImageExifHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E3AC71D6EF85000456A1C /* ImageExifHandler.swift */; };
+		849E3ACA1D6EFA5B00456A1C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849E3AC91D6EFA5B00456A1C /* ImageIO.framework */; };
 		84ACB04A1D6C553E005650A4 /* GradientLayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACB0491D6C553E005650A4 /* GradientLayerController.swift */; };
 		84ACB04E1D6C6739005650A4 /* GradientLayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACB04D1D6C6739005650A4 /* GradientLayerCell.swift */; };
 		84BB6AD01D4F06C400EA09BE /* Demo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84BB6ACE1D4F06C400EA09BE /* Demo.xcdatamodeld */; };
@@ -63,6 +66,9 @@
 		849E3ABE1D6E946B00456A1C /* GradientLayerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GradientLayerCell.xib; path = View/GradientLayerCell.xib; sourceTree = "<group>"; };
 		849E3AC01D6E948C00456A1C /* GradientLayerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientLayerHandler.swift; path = Handler/GradientLayerHandler.swift; sourceTree = "<group>"; };
 		849E3AC21D6EA47300456A1C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Demo/Info.plist; sourceTree = SOURCE_ROOT; };
+		849E3AC51D6EF82C00456A1C /* ImageExifController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageExifController.swift; path = Controller/ImageExifController.swift; sourceTree = "<group>"; };
+		849E3AC71D6EF85000456A1C /* ImageExifHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageExifHandler.swift; path = Handler/ImageExifHandler.swift; sourceTree = "<group>"; };
+		849E3AC91D6EFA5B00456A1C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		84ACB0491D6C553E005650A4 /* GradientLayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientLayerController.swift; path = Controller/GradientLayerController.swift; sourceTree = "<group>"; };
 		84ACB04D1D6C6739005650A4 /* GradientLayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientLayerCell.swift; path = View/GradientLayerCell.swift; sourceTree = "<group>"; };
 		84BB6ACF1D4F06C400EA09BE /* Demo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demo.xcdatamodel; sourceTree = "<group>"; };
@@ -75,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849E3ACA1D6EFA5B00456A1C /* ImageIO.framework in Frameworks */,
 				843EEE281D2E3E4E00217A30 /* QuartzCore.framework in Frameworks */,
 				84D31F111D5042A5005F4354 /* SimpleFramework.framework in Frameworks */,
 			);
@@ -111,6 +118,7 @@
 		843EEE261D2E3E4E00217A30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				849E3AC91D6EFA5B00456A1C /* ImageIO.framework */,
 				84792A981D4F5D72001EFC5C /* SugarRecord.framework */,
 				843EEE271D2E3E4E00217A30 /* QuartzCore.framework */,
 				498D92C78E89E6055F1662F9 /* Pods_Demo.framework */,
@@ -197,6 +205,7 @@
 				84925EC01D2CAA6D000ADC9F /* TotalList */,
 				840E369B1D376FF300863EB7 /* TestAnimation */,
 				84ACB0481D6C5503005650A4 /* TestGradientLayer */,
+				849E3AC41D6EF7EE00456A1C /* ImageExif */,
 			);
 			name = Module;
 			sourceTree = "<group>";
@@ -219,6 +228,15 @@
 				849E3AB71D6E943C00456A1C /* Main.storyboard */,
 			);
 			path = res;
+			sourceTree = "<group>";
+		};
+		849E3AC41D6EF7EE00456A1C /* ImageExif */ = {
+			isa = PBXGroup;
+			children = (
+				849E3AC51D6EF82C00456A1C /* ImageExifController.swift */,
+				849E3AC71D6EF85000456A1C /* ImageExifHandler.swift */,
+			);
+			name = ImageExif;
 			sourceTree = "<group>";
 		};
 		84ACB0481D6C5503005650A4 /* TestGradientLayer */ = {
@@ -347,8 +365,10 @@
 				84925EC21D2CAA7F000ADC9F /* TotalListController.swift in Sources */,
 				84925EBC1D2CAA2B000ADC9F /* AppDelegate.swift in Sources */,
 				84BB6AD01D4F06C400EA09BE /* Demo.xcdatamodeld in Sources */,
+				849E3AC61D6EF82C00456A1C /* ImageExifController.swift in Sources */,
 				840E36A01D37706200863EB7 /* TestAnimationHandler.swift in Sources */,
 				84E2D6AC1D3627A500EF46B3 /* MenuButtonView.swift in Sources */,
+				849E3AC81D6EF85000456A1C /* ImageExifHandler.swift in Sources */,
 				84925ECA1D2CAFB7000ADC9F /* AppRouter.swift in Sources */,
 				84ACB04E1D6C6739005650A4 /* GradientLayerCell.swift in Sources */,
 				84925ECC1D2CB069000ADC9F /* TotalListHandler.swift in Sources */,

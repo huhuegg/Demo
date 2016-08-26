@@ -66,6 +66,24 @@
             </objects>
             <point key="canvasLocation" x="784.79999999999995" y="309.89505247376314"/>
         </scene>
+        <!--Image Exif Controller-->
+        <scene sceneID="v98-xX-qyO">
+            <objects>
+                <viewController storyboardIdentifier="ImageExifController" id="Acu-QT-J0Q" customClass="ImageExifController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ejg-iv-Nv8"/>
+                        <viewControllerLayoutGuide type="bottom" id="hS2-Rp-4bd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xxs-bZ-zPS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cyj-S9-HpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="764" y="1022"/>
+        </scene>
         <!--Test Animation Controller-->
         <scene sceneID="8Fr-66-h2c">
             <objects>

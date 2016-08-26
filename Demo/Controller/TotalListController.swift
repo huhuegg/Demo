@@ -79,7 +79,7 @@ extension TotalListController {
         let uiMenu = Menu(groupName:"", items: [uiMenuItem, testAnimationMenuItem, testLayerMenuItem], isOpened: true)
         
         let imageMenuItem = MenuItem(type: MenuType.menu, name: "Image", action:nil)
-        let imageExifMenuItem = MenuItem(type: MenuType.item, name: "ImageIO:获取图片位置信息", action: nil)
+        let imageExifMenuItem = MenuItem(type: MenuType.item, name: "ImageIO:获取图片位置信息", action: #selector(self.showImageExif))
         let imageMenu = Menu(groupName:"", items: [imageMenuItem, imageExifMenuItem], isOpened: false)
         
         let networkkMenuItem = MenuItem(type: MenuType.menu, name: "Network", action:nil)
@@ -109,6 +109,10 @@ extension TotalListController {
     
     func showGradientLayer() {
         (self.handler as! TotalListHandler).showGradientLayer(from: self)
+    }
+    
+    func showImageExif() {
+        (self.handler as! TotalListHandler).showImageExif(from: self)
     }
 }
 
